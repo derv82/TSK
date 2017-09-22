@@ -2,7 +2,7 @@
 # coding=utf-8
 
 # The Skeleton Key v.the first [ 9-11-2017 ]
-# Codename - The Patriots Edition
+# Codename - The Patriotic Penguin Edition
 #
 # A project by sandmansandito and derv82
 #
@@ -18,7 +18,7 @@ init()
 # Set variable shotcuts for colorama colors
 FR = Fore.RED; FW = Fore.WHITE; FG = Fore.GREEN; FB = Fore.BLACK; FY = Fore.YELLOW; FM = Fore.MAGENTA; FLB = Fore.LIGHTBLUE_EX
 BLB = Back.LIGHTBLACK_EX;  BR = Back.RED; BW = Back.WHITE; BB = Back.BLUE
-SB = Style.BRIGHT; SD = Style.DIM; BRST = Back.RESET
+SB = Style.BRIGHT; SD = Style.DIM; SN = Style.NORMAL; BRST = Back.RESET
 
 def print_menu_technicolorama():
     print('\n\n')
@@ -53,7 +53,7 @@ def print_menu_technicolorama():
     print('\t      ' + FW + BLB + 'E' + BRST + '  [' + FG + SB + 'B' + FW + ']ash Bunny  ' + FW + '       Payload Puritania              ' + FW + BLB + 'E' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
     print('\t      ' + FW + BLB + 'N' + BRST + '  [' + FG + SB + 'T' + FW + ']eensy' + FM + '             Teensy HID Attacks             ' + FW + BLB + 'N' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
     print('\t      ' + FW + BLB + 'U' + BRST + '  [' + FG + SB + 'U' + FW + ']SB' + FLB + '                USB Flash Drive Dropper        ' + FW + BLB + 'U' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('                                                                            ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
+    print('                                                                            ' + BLB + '  ' + BRST + SD + '    v1.0 [ The Patriotic Penguin Edition 🐧 ]     ' + BLB + SB + '  ' + BRST)
     print('\t' + FW + SB + '      ' + BLB + '*' + '                                                     ' + ' ' + BLB + FW + SB + '*' + BRST + '      ' + BLB + '                                                     ' + BRST + Style.RESET_ALL)
 
 print_menu_technicolorama()
