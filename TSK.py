@@ -14,6 +14,7 @@ import apt
 import sys
 import platform
 from colorama import init, Fore, Back, Style
+from future.builtins import input
 
 os.system('reset')
 sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=140))
