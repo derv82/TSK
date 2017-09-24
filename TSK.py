@@ -92,26 +92,13 @@ def check_deps():
 
             print("\t[+] Font-Awesome        [NOT INSTALLED]")
 
-            print("\t\t[-] Installing Font-Awesome [ 'apt-get install fonts-font-awesome' ]")
+            print("\t[-] Installing Font-Awesome [ 'apt-get install fonts-font-awesome' ]")
             os.system('apt-get install fonts-font-awesome')
 
-            print("\t\t[-] Rebuilding Font Cache [ 'fc-cache -f']")
+            print("\t[-] Rebuilding Font Cache [ 'fc-cache -f']")
             os.system('fc-cache -f')
 
             needed += 1
-
-        if apt_cache["python3-pip"].is_installed == True:
-
-            print("\t[+] python3-pip         [INSTALLED]")
-
-        else:
-
-            print("\t[+] python3-pip         [INSTALLED]")
-
-            print("\t[-] Installing python3-pip [ 'apt-get install python3-pip' ]")
-            os.system('apt-get install python3-pip')
-
-            print("\t[-] Installing colorama [ 'pip3 install colorama' ]")
 
         if needed > 0:
             os.system('python3 ./TSK.py')
@@ -128,7 +115,7 @@ while menuLoop == True:
 
     try:
 
-        #check_deps()
+        check_deps()
         print_menu_technicolorama()
 
         choice = input("\n\t      Enter your selection : ")
