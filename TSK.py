@@ -11,6 +11,7 @@
 
 from colorama import init, Fore, Back, Style
 import os
+import sys
 
 os.system('clear')
 init()
@@ -18,42 +19,81 @@ init()
 # Set variable shotcuts for colorama colors
 FR = Fore.RED; FW = Fore.WHITE; FG = Fore.GREEN; FB = Fore.BLACK; FY = Fore.YELLOW; FM = Fore.MAGENTA; FLB = Fore.LIGHTBLUE_EX
 BLB = Back.LIGHTBLACK_EX;  BR = Back.RED; BW = Back.WHITE; BB = Back.BLUE
-SB = Style.BRIGHT; SD = Style.DIM; SN = Style.NORMAL; BRST = Back.RESET
+SRST = Style.RESET_ALL; SB = Style.BRIGHT; SD = Style.DIM; SN = Style.NORMAL; BRST = Back.RESET; FRST = Fore.RESET
 
 def print_menu_technicolorama():
     print('\n\n')
-    print('\t' + FR + SB + 'TTTTTTTTTTTTTTTTTTTTTTT   SSSSSSSSSSSSSSS KKKKKKKKK    KKKKKKK' + '      ' + BLB + '                                                     ' + BRST)
-    print('\t' + FR + SB + 'T:::::::::::::::::::::T SS:::::::::::::::SK:::::::K    K:::::K' + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + 'T:::::::::::::::::::::TS:::::SSSSSS::::::SK:::::::K    K:::::K' + '      ' + BLB + '  ' + BRST + FG + '   🔑  A framework for the creation and           ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + 'T:::::TT:::::::TT:::::TS:::::S     SSSSSSSK:::::::K   K::::::K' + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + 'TTTTTT  T:::::T  TTTTTTS:::::S            KK::::::K  K:::::KKK' + '      ' + BLB + '  ' + BRST + FG + '      deployment of USB/HID based attacks        ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + '        T:::::T        S:::::S              K:::::K K:::::K' + '         ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + '        T:::::T         S::::SSSS           K::::::K:::::K' + '          ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + '        T:::::T          SS::::::SSSSS      K:::::::::::K' + '           ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + '        T:::::T            SSS::::::::SS    K:::::::::::K' + '           ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + '        T:::::T               SSSSSS::::S   K::::::K:::::K' + '          ' + BLB + '  ' + BRST + FG + '   💾  A project by sandmansandito & derv82       ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + '        T:::::T' + FW +'        [v1.0]' + FR +'      S:::::S  K:::::K K:::::K' + '         ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + '        T:::::T                    S:::::SKK::::::K  K:::::KKK' + '      ' + BLB + '  ' + BRST + FG + '      Dreamed up under the wet hot neon lights   ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + '      TT:::::::TT      SSSSSSS     S:::::SK:::::::K   K::::::K' + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + '      T:::::::::T      S::::::SSSSSS:::::SK:::::::K    K:::::K' + '      ' + BLB + '  ' + BRST + FG + '      of the Las Vegas Strip                     ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + '      T:::::::::T      S:::::::::::::::SS K:::::::K    K:::::K' + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t' + FR + SB + '      TTTTTTTTTTT       SSSSSSSSSSSSSSS   KKKKKKKKK    KKKKKKK' + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('                                                                            ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print(FW + SD + '              ========================================================' + '      ' + SB + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print(FW + SB + '                 THE                  SKELETON                  KEY' + '         ' + SB + BLB + '  ' + BRST + FG + '   📃  Select a menu option on the left to        ' + BLB + '  ' + BRST)
-    print(FW + SD + '              ========================================================' + '      ' + SB + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('                                                                            ' + BLB + '  ' + BRST + FG + '       view payloads for that device.            ' + BLB + '  ' + BRST)
-    print('\t' + FW + SB + '      ' + BLB + '*' + '                                                     ' + ' ' + BLB + FW + SB + '*' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('                                                                            ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t      ' + FW + BLB + 'T' + BRST + '  [' + FG + SB + 'H' + FW + ']elp  ' + FW + BR + '             Help Me, Rhonda               ' + BRST + ' ' + FW + BLB + 'T' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t      ' + FW + BLB + 'S' + BRST + '  [' + FG + SB + 'A' + FW + ']bout ' + FB + BW + '             Check It Out!!!               ' + BRST + ' ' + FW + BLB + 'S' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t      ' + FW + BLB + 'K' + BRST + '  [' + FG + SB + 'Q' + FW + ']uit  ' + FW + BB + '             Blow This Joint               ' + BRST + ' ' + FW + BLB + 'K' + BRST + '      ' + BLB + '  ' + BRST + FG + '   📖  Please see the README file or HELP Menu    ' + BLB + '  ' + BRST)
-    print('                                                                            ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t      ' + FW + BLB + 'M' + BRST + '  [' + FG + SB + 'R' + FW + ']ubber Ducky  ' + FY + '     You\'''re The One                 ' + FW + BLB + 'M' + BRST + '      ' + BLB + '  ' + BRST + FG + '      for more information on using TSK          ' + BLB + '  ' + BRST)
-    print('\t      ' + FW + BLB + 'E' + BRST + '  [' + FG + SB + 'B' + FW + ']ash Bunny  ' + FW + '       Payload Puritania              ' + FW + BLB + 'E' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t      ' + FW + BLB + 'N' + BRST + '  [' + FG + SB + 'T' + FW + ']eensy' + FM + '             Teensy HID Attacks             ' + FW + BLB + 'N' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('\t      ' + FW + BLB + 'U' + BRST + '  [' + FG + SB + 'U' + FW + ']SB' + FLB + '                USB Flash Drive Dropper        ' + FW + BLB + 'U' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST)
-    print('                                                                            ' + BLB + '  ' + BRST + SD + '    v1.0 [ The Patriotic Penguin Edition 🐧 ]     ' + BLB + SB + '  ' + BRST)
+    print('\t' + FR + SB + 'TTTTTTTTTTTTTTTTTTTTTTT   SSSSSSSSSSSSSSS KKKKKKKKK    KKKKKKK' + '      ' + BLB + '                                                     ' + BRST + FRST)
+    print('\t' + FR + SB + 'T:::::::::::::::::::::T SS:::::::::::::::SK:::::::K    K:::::K' + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + 'T:::::::::::::::::::::TS:::::SSSSSS::::::SK:::::::K    K:::::K' + '      ' + BLB + '  ' + BRST + FG + '   🔑  A framework for the creation and           ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + 'T:::::TT:::::::TT:::::TS:::::S     SSSSSSSK:::::::K   K::::::K' + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + 'TTTTTT  T:::::T  TTTTTTS:::::S            KK::::::K  K:::::KKK' + '      ' + BLB + '  ' + BRST + FG + '      deployment of USB/HID based attacks        ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + '        T:::::T        S:::::S              K:::::K K:::::K' + '         ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + '        T:::::T         S::::SSSS           K::::::K:::::K' + '          ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + '        T:::::T          SS::::::SSSSS      K:::::::::::K' + '           ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + '        T:::::T            SSS::::::::SS    K:::::::::::K' + '           ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + '        T:::::T               SSSSSS::::S   K::::::K:::::K' + '          ' + BLB + '  ' + BRST + FG + '   💾  A project by sandmansandito & derv82       ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + '        T:::::T' + FW +'        [v1.0]' + FR +'      S:::::S  K:::::K K:::::K' + '         ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + '        T:::::T                    S:::::SKK::::::K  K:::::KKK' + '      ' + BLB + '  ' + BRST + FG + '      Dreamed up under the wet hot neon lights   ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + '      TT:::::::TT      SSSSSSS     S:::::SK:::::::K   K::::::K' + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + '      T:::::::::T      S::::::SSSSSS:::::SK:::::::K    K:::::K' + '      ' + BLB + '  ' + BRST + FG + '      of the Las Vegas Strip                     ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + '      T:::::::::T      S:::::::::::::::SS K:::::::K    K:::::K' + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t' + FR + SB + '      TTTTTTTTTTT       SSSSSSSSSSSSSSS   KKKKKKKKK    KKKKKKK' + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('                                                                            ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print(FW + SD + '              ========================================================' + '      ' + SB + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST + SRST)
+    print(FW + SB + '                 THE                  SKELETON                  KEY' + '         ' + SB + BLB + '  ' + BRST + FG + '   📃  Select a menu option on the left to        ' + BLB + '  ' + BRST + FRST + SRST)
+    print(FW + SD + '              ========================================================' + '      ' + SB + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST + SRST)
+    print('                                                                            ' + BLB + '  ' + SB + BRST + FG + '       view payloads for that device.            ' + BLB + '  ' + BRST + FRST+ SRST)
+    print('\t' + FW + SB + '      ' + BLB + '*' + '                                                     ' + ' ' + BLB + FW + SB + '*' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('                                                                            ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t      ' + FW + BLB + 'T' + BRST + '  [' + FG + SB + 'H' + FW + ']elp  ' + FW + BR + '             Help Me, Rhonda               ' + BRST + ' ' + FW + BLB + 'T' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t      ' + FW + BLB + 'S' + BRST + '  [' + FG + SB + 'A' + FW + ']bout ' + FB + BW + '             Check It Out!!!               ' + BRST + ' ' + FW + BLB + 'S' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t      ' + FW + BLB + 'K' + BRST + '  [' + FG + SB + 'Q' + FW + ']uit  ' + FW + BB + '             Blow This Joint               ' + BRST + ' ' + FW + BLB + 'K' + BRST + '      ' + BLB + '  ' + BRST + FG + '   📖  Please see the README file or HELP Menu    ' + BLB + '  ' + BRST + FRST)
+    print('                                                                            ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t      ' + FW + BLB + 'M' + BRST + '  [' + FG + SB + 'R' + FW + ']ubber Ducky  ' + FY + '     You\'''re The One                 ' + FW + BLB + 'M' + BRST + '      ' + BLB + '  ' + BRST + FG + '      for more information on using TSK          ' + BLB + '  ' + BRST + FRST)
+    print('\t      ' + FW + BLB + 'E' + BRST + '  [' + FG + SB + 'B' + FW + ']ash Bunny  ' + FW + '       Payload Puritania              ' + FW + BLB + 'E' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST + SRST)
+    print('\t      ' + FW + BLB + 'N' + BRST + '  [' + FG + SB + 'T' + FW + ']eensy' + FM + '             Teensy HID Attacks             ' + FW + BLB + 'N' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
+    print('\t      ' + FW + BLB + 'U' + BRST + '  [' + FG + SB + 'U' + FW + ']SB' + FLB + '                USB Flash Drive Dropper        ' + FW + BLB + 'U' + BRST + '      ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST + SRST)
+    print('                                                                            ' + BLB + '  ' + BRST + SD + '    v1.0 [ The Patriotic Penguin Edition 🐧 ]     ' + BLB + SB + '  ' + BRST + FRST + SRST)
     print('\t' + FW + SB + '      ' + BLB + '*' + '                                                     ' + ' ' + BLB + FW + SB + '*' + BRST + '      ' + BLB + '                                                     ' + BRST + Style.RESET_ALL)
 
-print_menu_technicolorama()
+
+menuLoop = True
+
+while menuLoop == True:
+
+    try:
+
+        print_menu_technicolorama()
+
+        choice = input("\n\t      Enter your selection : ")
+
+        if choice == 'R' or choice == 'r':
+            ducky_menu()
+
+        elif choice == 'B' or choice == 'b':
+            bunny_menu()
+
+        elif choice == 'T' or choice == 't':
+            teensy_menu()
+
+        elif choice == 'U' or choice == 'u':
+            USB_menu()
+
+        elif choice == 'H' or choice == 'h':
+            os.system('less README.md')
+
+        elif choice == 'A' or choice == 'a':
+            print_menu_technicolorama()
+
+        elif choice == 'Q' or choice == 'q':
+            print("\n\t      Thank you for checking out TSK! [ HACK THE PLANET!!! ]\n")
+            menuLoop = False
+
+        else:
+
+            input("\n\t      No such option " + "\'" + choice + "\'" + " exists." + " Press ENTER key to try again.")
+
+    except KeyboardInterrupt:
+        print("\n\n\t      Exiting in a HURRY!\n")
+        sys.exit(0)
