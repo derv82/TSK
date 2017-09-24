@@ -101,11 +101,10 @@ def check_deps():
             needed += 1
 
         if needed > 0:
-            os.system('python3 ./TSK.py')
+            os.system('./TSK.py')
             sys.exit()
 
         else:
-            input("\n\tPRESS ENTER TO CONTINUE")
 
             os.system('reset')
 
