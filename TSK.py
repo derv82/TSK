@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # coding=utf-8
 
 # The Skeleton Key v.the first [ 9-11-2017 ]
@@ -93,7 +93,7 @@ def check_deps():
             print("\t[+] Font-Awesome        [NOT INSTALLED]")
 
             print("\t[-] Installing Font-Awesome [ 'apt-get install fonts-font-awesome' ]")
-            os.system('apt-get install fonts-font-awesome')
+            os.system('apt-get update && apt-get install fonts-font-awesome')
 
             print("\t[-] Rebuilding Font Cache [ 'fc-cache -f']")
             os.system('fc-cache -f')
@@ -134,6 +134,7 @@ while menuLoop == True:
 
         elif choice == 'H' or choice == 'h':
             os.system('less README.md')
+            continue
 
         elif choice == 'A' or choice == 'a':
             print_menu_technicolorama()
