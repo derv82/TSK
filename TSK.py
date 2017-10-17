@@ -41,7 +41,8 @@ def get_line(lines, index, justification=49):
     else:
         return "".ljust(justification)
 
-'''Right-side box message(s) when main menu is displayed'''
+# // Right-side box message(s) when main menu is displayed //
+
 main_menu_lines = [
         '',
         FG + '     A framework for the creation and           ',
@@ -74,8 +75,42 @@ main_menu_lines = [
         SD + '    v1.0 [ The Patriotic Penguin Edition  ]     '
     ]
 
+# // Right-side box message(s) when USB menu is displayed //
+USB_menu_lines = [
+        '',
+        FLB + SB + '     USB Flash Drive Dropper Menu               ',
+        '',
+        FLB + SN + '      choose an option below for more info       ',
+        '',
+        '',
+        '',
+        '',
+        FLB + '   1. Extract dropper files to a USB drive       ',
+        '',
+        FG + '      Dreamed up under the wet hot neon lights   ',
+        '',
+        FG + '      of the Las Vegas Strip                     ',
+        '',
+        '',
+        '',
+        '',
+        FG + '     Select a menu option on the left to        ',
+        '',
+        FG + '       view payloads for that device.            ',
+        '',
+        '',
+        '',
+        FG + '     Please see the README file or HELP Menu    ',
+        FG + '      for more information on using TSK          ',
+        '',
+        '',
+        '',
+        SD + '    v1.0 [ The Patriotic Penguin Edition  ]     '
+    ]
+
+
 # Print Main/About Menu
-def print_menu_technicolorama(right_menu_lines=main_menu_lines):
+def print_menu_technicolorama(right_menu_lines = main_menu_lines):
     """
     Prints the Main/About menu which are one in the same.
     The colors are defined from colorama and given custom shortcuts to cut down on the amount of bloat.
@@ -116,11 +151,48 @@ def print_menu_technicolorama(right_menu_lines=main_menu_lines):
     print('                                                                            ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
     print('\t      ' + FW + BLB + 'M' + BRST + '  [' + FG + SB + 'R' + FW + ']ubber Ducky  ' + FY + '     You\'''re The One                 ' + FW + BLB + 'M' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 24) + BLB + '  ' + BRST + FRST)
     print('\t      ' + FW + BLB + 'E' + BRST + '  [' + FG + SB + 'B' + FW + ']ash Bunny  ' + FW + '       Payload Puritania              ' + FW + BLB + 'E' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 25) + BLB + '  ' + BRST + FRST + SRST)
-    print('\t      ' + FW + BLB + 'N' + BRST + '  [' + FG + SB + 'T' + FW + ']eensy' + FM + '             Teensy HID Attacks             ' + FW + BLB + 'N' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 26) + BLB + '  ' + BRST + FRST)
-    print('\t      ' + FW + BLB + 'U' + BRST + '  [' + FG + SB + 'U' + FW + ']SB' + FLB + '                USB Flash Drive Dropper        ' + FW + BLB + 'U' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 27) + BLB + '  ' + BRST + FRST + SRST)
+    print(SB + '\t      ' + FW + BLB + 'N' + BRST + '  [' + FG + SB + 'T' + FW + ']eensy' + FM + '             Teensy HID Attacks             ' + FW + BLB + 'N' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 26) + BLB + '  ' + BRST + FRST + SRST)
+    print(SB + '\t      ' + FW + BLB + 'U' + BRST + '  [' + FG + SB + 'U' + FW + ']SB' + FLB + '                USB Flash Drive Dropper        ' + FW + BLB + 'U' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 27) + BLB + '  ' + BRST + FRST + SRST)
     print(SB + '                                                                            ' + BLB + '  ' + BRST + SRST + get_line(right_menu_lines, 28) + BLB + SB + '  ' + BRST + FRST + SRST)
     print('\t' + FW + SB + '      ' + BLB + '*' + '                                                     ' + ' ' + BLB + FW + SB + '*' + BRST + '      ' + BLB + '                                                     ' + BRST + Style.RESET_ALL)
 
+
+def USB_menu(right_menu_lines = USB_menu_lines):
+
+    print_menu_technicolorama(right_menu_lines)
+
+    USB_menuLoop = True
+    while USB_menuLoop == True:
+
+        USB_choice = input("\n\t      Enter your USB selection : ")
+
+        if USB_choice == '1':
+            print("OPTION 1")
+
+        elif USB_choice == 'B' or USB_choice == 'b':
+            bunny_menu()
+
+        elif USB_choice == 'T' or USB_choice == 't':
+            teensy_menu()
+
+        elif USB_choice == 'U' or USB_choice == 'u':
+            USB_menu()
+
+        elif USB_choice == 'H' or USB_choice == 'h':
+            os.system('xdg-open README.md')
+            USB_menu(right_menu_lines = USB_menu_lines)
+            continue
+
+        elif USB_choice == 'A' or USB_choice == 'a':
+            main_menu()
+
+        elif USB_choice == 'Q' or USB_choice == 'q':
+            print("\n\t      Thank you for checking out TSK! [ HACK THE PLANET!!! ]\n")
+            sys.exit()
+
+        else:
+            input("\n\t      No such option " + "\'" + USB_choice + "\'" + " exists." + " Press ENTER key to try again.")
+            USB_menu(right_menu_lines = USB_menu_lines)
 
 def check_deps():
 
@@ -160,45 +232,48 @@ def check_deps():
 
             os.system('reset')
 
-menuLoop = True
+def main_menu():
 
-while menuLoop == True:
+    print_menu_technicolorama(right_menu_lines = main_menu_lines)
+    # While loop for asking for menu input. The choices here are obvious and display appropriate menu selection
+    while menuLoop == True:
 
-    try:
+        try:
 
-        check_deps()
-        print_menu_technicolorama()
+            choice = input("\n\t      Enter your selection : ")
 
-        choice = input("\n\t      Enter your selection : ")
+            if choice == 'R' or choice == 'r':
+                ducky_menu()
 
-        if choice == 'R' or choice == 'r':
-            ducky_menu()
+            elif choice == 'B' or choice == 'b':
+                bunny_menu()
 
-        elif choice == 'B' or choice == 'b':
-            bunny_menu()
+            elif choice == 'T' or choice == 't':
+                teensy_menu()
 
-        elif choice == 'T' or choice == 't':
-            teensy_menu()
+            elif choice == 'U' or choice == 'u':
+                USB_menu()
 
-        elif choice == 'U' or choice == 'u':
-            USB_menu()
+            elif choice == 'H' or choice == 'h':
+                os.system('xdg-open README.md')
+                print_menu_technicolorama(right_menu_lines = main_menu_lines)
+                continue
 
-        elif choice == 'H' or choice == 'h':
+            elif choice == 'A' or choice == 'a':
+                main_menu()
 
-            os.system('xdg-open README.md')
-            continue
+            elif choice == 'Q' or choice == 'q':
+                print("\n\t      Thank you for checking out TSK! [ HACK THE PLANET!!! ]\n")
+                sys.exit()
 
-        elif choice == 'A' or choice == 'a':
-            print_menu_technicolorama()
+            else:
+                input("\n\t      No such option " + "\'" + choice + "\'" + " exists." + " Press ENTER key to try again.")
+                print_menu_technicolorama(right_menu_lines = main_menu_lines)
 
-        elif choice == 'Q' or choice == 'q':
-            print("\n\t      Thank you for checking out TSK! [ HACK THE PLANET!!! ]\n")
-            menuLoop = False
+        except KeyboardInterrupt:
+            print("\n\n\t      Exiting in a HURRY!\n")
+            sys.exit(0)
 
-        else:
 
-            input("\n\t      No such option " + "\'" + choice + "\'" + " exists." + " Press ENTER key to try again.")
-
-    except KeyboardInterrupt:
-        print("\n\n\t      Exiting in a HURRY!\n")
-        sys.exit(0)
+# On startup, set the menuLoop variable for menu choices, check dependencies and print the main menu
+menuLoop = True; check_deps(); main_menu();
