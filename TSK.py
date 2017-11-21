@@ -1,33 +1,116 @@
 #!/usr/bin/python3
 # coding=utf-8
 
-# The Skeleton Key v.the first [ 9-11-2017 ]
-# Codename - The Patriotic Penguin Edition
-#
-# A project by sandmansandito and derv82
-#
-# This is a very experimental first version
-# Hopefully it should improve over time
+##############################################
+# The Skeleton Key v.the first [ 9-11-2017 ] #
+# Codename - The Patriotic Penguin           #
+#                                            #
+# - A project by sandmansandito and derv82 - #
+#                                            #
+# This is a very experimental first version  #
+# Hopefully it should improve over time      #
+##############################################
 
 import os
 import apt
 import sys
+import time
+import locale
 import platform
+import subprocess
+from dialog import Dialog
 from colorama import init, Fore, Back, Style
 from future.builtins import input
 
-os.system('reset')
-sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=140))
-
-init()
-
 # Set variable shotcuts for colorama colors
-FR = Fore.RED; FW = Fore.WHITE; FG = Fore.GREEN; FB = Fore.BLACK; FY = Fore.YELLOW; FM = Fore.MAGENTA; FLB = Fore.LIGHTBLUE_EX
-BLB = Back.LIGHTBLACK_EX;  BR = Back.RED; BW = Back.WHITE; BB = Back.BLUE
+FR = Fore.RED; FW = Fore.WHITE; FG = Fore.GREEN; FB = Fore.BLACK; FY = Fore.YELLOW; FM = Fore.MAGENTA; FBL = Fore.BLUE; FLB = Fore.LIGHTBLUE_EX; FLW = Fore.LIGHTWHITE_EX; FLBL = Fore.LIGHTBLACK_EX
+BLB = Back.LIGHTBLACK_EX;  BR = Back.RED; BW = Back.WHITE; BB = Back.BLUE; BG = Back.GREEN; BM = Back.MAGENTA; BY = Back.YELLOW
 SRST = Style.RESET_ALL; SB = Style.BRIGHT; SD = Style.DIM; SN = Style.NORMAL; BRST = Back.RESET; FRST = Fore.RESET
+
+# Are we running inside Kali Linux?
+apt_cache = apt.Cache()
+
+linux_distro = platform.linux_distribution()
+
+if 'Kali' in linux_distro:
+    isKali = True
+
+else:
+    isKali = False
+
+
+# Function to check for installation of a few dependencies
+def check_deps():
+
+    needed = 0
+
+    # `Kali` Linux Dependencies
+
+    if isKali:
+
+        apt_cache.open()
+
+        # if os.path.isdir('/usr/share/fonts-font-awesome/') == True: [ Another way ]
+        if apt_cache["fonts-font-awesome"].is_installed == True:
+
+            print("\t[+] Font-Awesome        [INSTALLED]")
+            time.sleep(1)
+            print("\t[+] Looking good, continuing")
+            time.sleep(1)
+
+        else:
+
+            print("\t[+] Font-Awesome        [NOT INSTALLED]")
+            time.sleep(1)
+            print("\t[-] Installing Font-Awesome [ 'apt-get install fonts-font-awesome' ]")
+            os.system('apt-get update && apt-get install fonts-font-awesome')
+
+            print("\t[-] Rebuilding Font Cache [ 'fc-cache -f']")
+            os.system('fc-cache -f')
+
+            needed += 1
+
+        if apt_cache["python3-dialog"].is_installed == True:
+
+            print("\t[+] pythondialog        [INSTALLED]")
+            time.sleep(1)
+            print("\t[+] Looking good, continuing")
+            time.sleep(1)
+
+        else:
+
+            print("\t[+] pythondialog        [NOT INSTALLED]")
+            time.sleep(1)
+            print("\t[-] Installing pythondialog [ 'apt-get install python3-dialog' ]")
+            os.system('apt-get update && apt-get install python3-dialog')
+
+            print("\t[-] Rebuilding Font Cache [ 'fc-cache -f']")
+            os.system('fc-cache -f')
+
+            needed += 1
+
+        if needed > 0:
+            os.system('./TSK.py')
+            sys.exit()
+
+        else:
+
+            os.system('clear')
+
+
+def help_me_rhonda():
+
+    if isKali:
+
+        os.system('gnome-terminal -- less README.md');
+
+    else:
+
+        os.system('gnome-terminal -x less README.md');
 
 
 def get_line(lines, index, justification=49):
+
     """
     Helper method for print_menu_technicolorama.
     Returns the line from `lines` at index `index`, or an empty string if no line exists
@@ -36,13 +119,17 @@ def get_line(lines, index, justification=49):
         index (int): Zero-based index of an element in `lines`
         justification (int): Optional. How many characters to justify the text (space-padding)
     """
+
     if index < len(lines):
+
         return lines[index].ljust(justification)
+
     else:
+
         return "".ljust(justification)
 
-# // Right-side box message(s) when main menu is displayed //
-
+################################################################
+# // Right-side box message(s) when Main Menu is displayed // #
 main_menu_lines = [
         '',
         FG + '     A framework for the creation and           ',
@@ -72,24 +159,90 @@ main_menu_lines = [
         '',
         '',
         '',
-        SD + '    v1.0 [ The Patriotic Penguin Edition  ]     '
+        FLW + '    v1.0 [ The Patriotic Penguin Edition  ]     '
     ]
 
-# // Right-side box message(s) when USB menu is displayed //
+# // Right-side box message(s) when USB Rubber Ducky Menu is displayed // #
+ducky_menu_lines = [
+        '',
+        FW + '     ' + BY + 'USB Rubber Ducky Payloads Menu' + BRST + '             ',
+        '',
+        FY + '      Choose a number below for more options     ',
+        '',
+        FY + '      Please see README for detailed usage       ',
+        '',
+        '',
+        FW + '   1. ' + BY + 'HAK5 Rubber Ducky Payload Collection' + BRST + '       ',
+        '',
+        FY + '      Select from a list of payloads to edit     ',
+        '',
+        FY + '      and optionally flash to the ducky          ',
+        '',
+        '',
+        FW + '   2. ' + BY + 'Install simple-ducky payload generator' + BRST + '     ',
+        '',
+        FY + '      Install the latest version of simple-ducky ',
+        '',
+        FY + '      for generating ducky payloads & listeners  ',
+        '',
+        FW + '   3. ' + BY + 'Encoders | Decoders | Firmwares | Payloads' + BRST + ' ',
+        '',
+        FY + '      Select from various encoders, decoders,    ',
+        FY + '      firmwares and other miscellaneous useful   ',
+        '',
+        FY + '      payloads for the USB rubber ducky          ',
+        '',
+        FLBL + '  <<< [P]REV       ' + FW + 'Menu 1 / 1' + FLBL +'        [N]EXT >>>  '
+    ]
+
+# // Right-side box message(s) when USB menu is displayed // #
 USB_menu_lines = [
         '',
-        FLB + SB + '     USB Flash Drive Dropper Menu               ',
+        FW + '     ' + BB + 'USB Flash Drive Dropper Menu' + BRST + '               ',
         '',
-        FLB + SN + '      choose an option below for more info       ',
+        FBL + '      Choose a number below for more options     ',
+        '',
+        FBL + '      Please see README for detailed usage       ',
+        '',
+        '',
+        FW + '   1. ' + BB + 'Extract dropper files to a location' + BRST + '        ',
+        '',
+        FBL + '      Copies templated dropper files to a        ',
+        '',
+        FBL + '      USB drive or specific location             ',
+        '',
+        '',
+        FW + '   2. ' + BB + 'Extract snarfer files to a location' + BRST + '        ',
+        '',
+        FLB + '      Copies snarf parser & editable config      ',
+        '',
+        FLB + '      file to a USB drive or specific location   ',
+        '',
+        FW + '   3. ' + BB + 'Configure a \'BadUSB\' type USB Drive' + BRST + '        ',
+        '',
+        FLB + '      Copies BadUSB Python implementation for    ',
+        FLB + '      Phison 2303 to a specific location         ',
+        '',
+        '',
+        '',
+        FLBL + '  <<< [P]REV       ' + FW + 'Menu 1 / 1' + FLBL +'        [N]EXT >>>  '
+    ]
+
+# // Right-side box message(s) when Teensy menu is displayed // #
+teensy_menu_lines = [
+        '',
+        FW + '     ' + BM + 'Teensy HID Payloads Menu' + BRST + '                   ',
+        '',
+        FM + '      Choose an option below for more info       ',
         '',
         '',
         '',
         '',
-        FLB + '   1. Extract dropper files to a USB drive       ',
+        FW + '   1. ' + BB + 'Extract dropper files to a USB drive' + BRST + '       ',
         '',
-        FG + '      Dreamed up under the wet hot neon lights   ',
+        FLB + '      Copies templated dropper files to a        ',
         '',
-        FG + '      of the Las Vegas Strip                     ',
+        FLB + '      drive or location of your choice           ',
         '',
         '',
         '',
@@ -105,12 +258,15 @@ USB_menu_lines = [
         '',
         '',
         '',
-        SD + '    v1.0 [ The Patriotic Penguin Edition  ]     '
+        FLW + '    v1.0 [ The Patriotic Penguin Edition  ]     '
     ]
 
+# END               Right-side box message(s)               END #
+#################################################################
 
 # Print Main/About Menu
 def print_menu_technicolorama(right_menu_lines = main_menu_lines):
+
     """
     Prints the Main/About menu which are one in the same.
     The colors are defined from colorama and given custom shortcuts to cut down on the amount of bloat.
@@ -152,22 +308,109 @@ def print_menu_technicolorama(right_menu_lines = main_menu_lines):
     print('\t      ' + FW + BLB + 'M' + BRST + '  [' + FG + SB + 'R' + FW + ']ubber Ducky  ' + FY + '     You\'''re The One                 ' + FW + BLB + 'M' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 24) + BLB + '  ' + BRST + FRST)
     print('\t      ' + FW + BLB + 'E' + BRST + '  [' + FG + SB + 'B' + FW + ']ash Bunny  ' + FW + '       Payload Puritania              ' + FW + BLB + 'E' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 25) + BLB + '  ' + BRST + FRST + SRST)
     print(SB + '\t      ' + FW + BLB + 'N' + BRST + '  [' + FG + SB + 'T' + FW + ']eensy' + FM + '             Teensy HID Attacks             ' + FW + BLB + 'N' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 26) + BLB + '  ' + BRST + FRST + SRST)
-    print(SB + '\t      ' + FW + BLB + 'U' + BRST + '  [' + FG + SB + 'U' + FW + ']SB' + FLB + '                USB Flash Drive Dropper        ' + FW + BLB + 'U' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 27) + BLB + '  ' + BRST + FRST + SRST)
+    print(SB + '\t      ' + FW + BLB + 'U' + BRST + '  [' + FG + SB + 'U' + FW + ']SB' + FLB + '                USB Related Deployments        ' + FW + BLB + 'U' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 27) + BLB + '  ' + BRST + FRST + SRST)
     print(SB + '                                                                            ' + BLB + '  ' + BRST + SRST + get_line(right_menu_lines, 28) + BLB + SB + '  ' + BRST + FRST + SRST)
     print('\t' + FW + SB + '      ' + BLB + '*' + '                                                     ' + ' ' + BLB + FW + SB + '*' + BRST + '      ' + BLB + '                                                     ' + BRST + Style.RESET_ALL)
+
+def ducky_menu(right_menu_lines = ducky_menu_lines):
+
+    os.system('clear')
+
+    print_menu_technicolorama(right_menu_lines)
+
+    ducky_menuLoop = True
+
+    while ducky_menuLoop == True:
+
+        ducky_choice = input("\n\t      Enter your Ducky selection : ")
+
+        if ducky_choice == 'R' or ducky_choice == 'r':
+            print("\t      " + SB + BR + "ALREADY HERE!" + BRST)
+            time.sleep(2)
+            ducky_menu()
+
+        elif ducky_choice == 'B' or ducky_choice == 'b':
+            bunny_menu()
+
+        elif ducky_choice == 'T' or ducky_choice == 't':
+            teensy_menu()
+
+        elif ducky_choice == 'U' or ducky_choice == 'u':
+            USB_menu()
+
+        elif ducky_choice == 'H' or ducky_choice == 'h':
+            help_me_rhonda()
+            ducky_menu(right_menu_lines = ducky_menu_lines)
+            continue
+
+        elif ducky_choice == 'A' or ducky_choice == 'a':
+            main_menu()
+
+        elif ducky_choice == 'Q' or ducky_choice == 'q':
+            print("\n\t      Thank you for checking out TSK! [ HACK THE PLANET!!! ]\n")
+            sys.exit()
+
+        else:
+            input("\n\t      No such option " + "\'" + ducky_choice + "\'" + " exists." + " Press ENTER key to try again.")
+            ducky_menu(right_menu_lines = ducky_menu_lines)
+
+def teensy_menu(right_menu_lines = teensy_menu_lines):
+
+    os.system('clear')
+
+    print_menu_technicolorama(right_menu_lines)
+
+    teensy_menuLoop = True
+
+    while teensy_menuLoop == True:
+
+        teensy_choice = input("\n\t      Enter your USB selection : ")
+
+        if teensy_choice == 'R' or teensy_choice == 'r':
+            ducky_menu()
+
+        elif teensy_choice == 'B' or teensy_choice == 'b':
+            bunny_menu()
+
+        elif teensy_choice == 'T' or teensy_choice == 't':
+            print("\t      " + SB + BR + "ALREADY HERE!" + BRST)
+            time.sleep(2)
+            teensy_menu()
+
+        elif teensy_choice == 'U' or teensy_choice == 'u':
+            USB_menu()
+
+        elif teensy_choice == 'H' or teensy_choice == 'h':
+            help_me_rhonda()
+            teensy_menu(right_menu_lines = teensy_menu_lines)
+            continue
+
+        elif teensy_choice == 'A' or teensy_choice == 'a':
+            main_menu()
+
+        elif teensy_choice == 'Q' or teensy_choice == 'q':
+            print("\n\t      Thank you for checking out TSK! [ HACK THE PLANET!!! ]\n")
+            sys.exit()
+
+        else:
+            input("\n\t      No such option " + "\'" + teensy_choice + "\'" + " exists." + " Press ENTER key to try again.")
+            teensy_menu(right_menu_lines = teensy_menu_lines)
 
 
 def USB_menu(right_menu_lines = USB_menu_lines):
 
+    os.system('clear')
+
     print_menu_technicolorama(right_menu_lines)
 
     USB_menuLoop = True
+
     while USB_menuLoop == True:
 
         USB_choice = input("\n\t      Enter your USB selection : ")
 
-        if USB_choice == '1':
-            print("OPTION 1")
+        if USB_choice == 'R' or USB_choice == 'r':
+            ducky_menu()
 
         elif USB_choice == 'B' or USB_choice == 'b':
             bunny_menu()
@@ -179,7 +422,7 @@ def USB_menu(right_menu_lines = USB_menu_lines):
             USB_menu()
 
         elif USB_choice == 'H' or USB_choice == 'h':
-            os.system('xdg-open README.md')
+            help_me_rhonda()
             USB_menu(right_menu_lines = USB_menu_lines)
             continue
 
@@ -194,47 +437,13 @@ def USB_menu(right_menu_lines = USB_menu_lines):
             input("\n\t      No such option " + "\'" + USB_choice + "\'" + " exists." + " Press ENTER key to try again.")
             USB_menu(right_menu_lines = USB_menu_lines)
 
-def check_deps():
-
-    needed = 0
-
-    apt_cache = apt.Cache()
-
-    linux_distro = platform.linux_distribution()
-
-    # Kali Linux Dependencies
-
-    if 'Kali' in linux_distro:
-        apt_cache.open()
-
-        # if os.path.isdir('/usr/share/fonts-font-awesome/') == True: [ Another way ]
-        if apt_cache["fonts-font-awesome"].is_installed == True:
-
-            print("\t[+] Font-Awesome        [INSTALLED]")
-
-        else:
-
-            print("\t[+] Font-Awesome        [NOT INSTALLED]")
-
-            print("\t[-] Installing Font-Awesome [ 'apt-get install fonts-font-awesome' ]")
-            os.system('apt-get update && apt-get install fonts-font-awesome')
-
-            print("\t[-] Rebuilding Font Cache [ 'fc-cache -f']")
-            os.system('fc-cache -f')
-
-            needed += 1
-
-        if needed > 0:
-            os.system('./TSK.py')
-            sys.exit()
-
-        else:
-
-            os.system('reset')
 
 def main_menu():
 
+    os.system('clear')
+
     print_menu_technicolorama(right_menu_lines = main_menu_lines)
+
     # While loop for asking for menu input. The choices here are obvious and display appropriate menu selection
     while menuLoop == True:
 
@@ -255,7 +464,7 @@ def main_menu():
                 USB_menu()
 
             elif choice == 'H' or choice == 'h':
-                os.system('xdg-open README.md')
+                help_me_rhonda()
                 print_menu_technicolorama(right_menu_lines = main_menu_lines)
                 continue
 
@@ -275,5 +484,18 @@ def main_menu():
             sys.exit(0)
 
 
-# On startup, set the menuLoop variable for menu choices, check dependencies and print the main menu
-menuLoop = True; check_deps(); main_menu();
+
+if os.getuid() == 0:
+
+    # On startup, set the menuLoop variable for menu choices, check dependencies and print the main menu
+    os.system('clear')
+
+    sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=140))
+
+    menuLoop = True; check_deps(); main_menu();
+
+else:
+
+    exit("If you liked it then you should have run it as admin!")
+
+init()
