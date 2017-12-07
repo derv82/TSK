@@ -128,8 +128,9 @@ def get_line(lines, index, justification=49):
 
         return "".ljust(justification)
 
-################################################################
-# // Right-side box message(s) when Main Menu is displayed // #
+#####################################################################
+# ////////// [BEGIN] TSK RIGHT MENU DECLARATIONS [BEGIN] \\\\\\\\\\ #
+#####################################################################
 main_menu_lines = [
         '',
         FG + '     A framework for the creation and           ',
@@ -169,7 +170,7 @@ ducky_menu_lines = [
         '',
         FY + '      Choose a number below for more options     ',
         '',
-        FY + '      Please see README for detailed usage       ',
+        FY + '      Please see README for detailed info        ',
         '',
         '',
         FW + '   1. ' + BY + 'HAK5 Rubber Ducky Payload Collection' + BRST + '       ',
@@ -195,6 +196,72 @@ ducky_menu_lines = [
         FLBL + '  <<< [P]REV       ' + FW + 'Menu 1 / 1' + FLBL +'        [N]EXT >>>  '
     ]
 
+# // Right-side box message(s) when USB Rubber Ducky Menu is displayed // #
+bunny_menu_lines = [
+        '',
+        FW + '     ' + BLB + 'Bash Bunny Payloads Menu' + BRST + '                   ',
+        '',
+        FW + '      Choose a number below for more options     ',
+        '',
+        FW + '      Please see README for detailed info        ',
+        '',
+        '',
+        FW + '   1. ' + BLB + 'HAK5 Bash Bunny Payload Collection' + BRST + '         ',
+        '',
+        FW + '      Select from a list of payloads to edit     ',
+        '',
+        FW + '      and optionally transfer to the bash bunny  ',
+        '',
+        '',
+        FW + '   2. ' + BLB + 'Custom & User-Made Payloads' + BRST + '                ',
+        '',
+        FW + '      Select from a list of user-made payloads   ',
+        '',
+        FW + '      to edit & export to the HDD or bash bunny  ',
+        '',
+        FW + '   3. ' + BLB + 'Bash Bunny Firmware & Payload Updater' + BRST + '      ',
+        '',
+        FW + '      Select from various encoders, decoders,    ',
+        FW + '      firmwares and other miscellaneous useful   ',
+        '',
+        FW + '      payloads for the USB rubber ducky          ',
+        '',
+        FLBL + '  <<< [P]REV       ' + FW + 'Menu 1 / 1' + FLBL +'        [N]EXT >>>  '
+    ]
+
+# // Right-side box message(s) when Teensy menu is displayed // #
+teensy_menu_lines = [
+        '',
+        FW + '     ' + BM + 'Teensy & Arduino Payloads Menu' + BRST + '             ',
+        '',
+        FM + '      Choose a number below for more options     ',
+        '',
+        FM + '      Please see README for detailed info        ',
+        '',
+        '',
+        FW + '   1. ' + BM + 'Brutal Framework by Screetsec' + BRST + '              ',
+        '',
+        FM + '      Deploy various methods of HID attacks to   ',
+        '',
+        FM + '      Teensy For Use In Penetration Testing      ',
+        '',
+        '',
+        FW + '   2. ' + BM + 'Kautilya Framework by SamratAshok' + BRST + '          ',
+        '',
+        FM + '      Deploy various methods of HID attacks to   ',
+        '',
+        FM + '      Teensy For Use In Penetration Testing      ',
+        '',
+        FW + '   3. ' + BM + 'USBdriveby For Teensy & Arduino Pro Micro' + BRST + '  ',
+        '',
+        FM + '      The BadUSB type drive-by attack for        ',
+        FM + '      microcontrollers by Samy Kamkar            ',
+        '',
+        '',''
+        '',
+        FLBL + '  <<< [P]REV       ' + FW + 'Menu 1 / 1' + FLBL +'        [N]EXT >>>  '
+    ]
+
 # // Right-side box message(s) when USB menu is displayed // #
 USB_menu_lines = [
         '',
@@ -202,7 +269,7 @@ USB_menu_lines = [
         '',
         FBL + '      Choose a number below for more options     ',
         '',
-        FBL + '      Please see README for detailed usage       ',
+        FBL + '      Please see README for detailed info        ',
         '',
         '',
         FW + '   1. ' + BB + 'Extract dropper files to a location' + BRST + '        ',
@@ -228,43 +295,13 @@ USB_menu_lines = [
         FLBL + '  <<< [P]REV       ' + FW + 'Menu 1 / 1' + FLBL +'        [N]EXT >>>  '
     ]
 
-# // Right-side box message(s) when Teensy menu is displayed // #
-teensy_menu_lines = [
-        '',
-        FW + '     ' + BM + 'Teensy HID Payloads Menu' + BRST + '                   ',
-        '',
-        FM + '      Choose an option below for more info       ',
-        '',
-        '',
-        '',
-        '',
-        FW + '   1. ' + BB + 'Extract dropper files to a USB drive' + BRST + '       ',
-        '',
-        FLB + '      Copies templated dropper files to a        ',
-        '',
-        FLB + '      drive or location of your choice           ',
-        '',
-        '',
-        '',
-        '',
-        FG + '     Select a menu option on the left to        ',
-        '',
-        FG + '       view payloads for that device.            ',
-        '',
-        '',
-        '',
-        FG + '     Please see the README file or HELP Menu    ',
-        FG + '      for more information on using TSK          ',
-        '',
-        '',
-        '',
-        FLW + '    v1.0 [ The Patriotic Penguin Edition  ]     '
-    ]
-
-# END               Right-side box message(s)               END #
-#################################################################
-
-# Print Main/About Menu
+#####################################################################
+# //////////   [END] TSK RIGHT MENU DECLARATIONS [END]   \\\\\\\\\\ #
+#####################################################################
+#                                                                   #
+#####################################################################
+# //////////  [BEGIN] TSK MAIN MENU DECLARATION [BEGIN]  \\\\\\\\\\ #
+#####################################################################
 def print_menu_technicolorama(right_menu_lines = main_menu_lines):
 
     """
@@ -307,11 +344,14 @@ def print_menu_technicolorama(right_menu_lines = main_menu_lines):
     print('                                                                            ' + BLB + '  ' + BRST + '                                                 ' + BLB + '  ' + BRST + FRST)
     print('\t      ' + FW + BLB + 'M' + BRST + '  [' + FG + SB + 'R' + FW + ']ubber Ducky  ' + FY + '     You\'''re The One                 ' + FW + BLB + 'M' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 24) + BLB + '  ' + BRST + FRST)
     print('\t      ' + FW + BLB + 'E' + BRST + '  [' + FG + SB + 'B' + FW + ']ash Bunny  ' + FW + '       Payload Puritania              ' + FW + BLB + 'E' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 25) + BLB + '  ' + BRST + FRST + SRST)
-    print(SB + '\t      ' + FW + BLB + 'N' + BRST + '  [' + FG + SB + 'T' + FW + ']eensy' + FM + '             Teensy HID Attacks             ' + FW + BLB + 'N' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 26) + BLB + '  ' + BRST + FRST + SRST)
-    print(SB + '\t      ' + FW + BLB + 'U' + BRST + '  [' + FG + SB + 'U' + FW + ']SB' + FLB + '                USB Related Deployments        ' + FW + BLB + 'U' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 27) + BLB + '  ' + BRST + FRST + SRST)
+    print(SB + '\t      ' + FW + BLB + 'N' + BRST + '  [' + FG + SB + 'T' + FW + ']eensy' + FM + '             Teensy & Arduino Attacks       ' + FW + BLB + 'N' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 26) + BLB + '  ' + BRST + FRST + SRST)
+    print(SB + '\t      ' + FW + BLB + 'U' + BRST + '  [' + FG + SB + 'U' + FW + ']SB' + FLB + '                USB Dropper Related Vectors    ' + FW + BLB + 'U' + BRST + '      ' + BLB + '  ' + BRST + get_line(right_menu_lines, 27) + BLB + '  ' + BRST + FRST + SRST)
     print(SB + '                                                                            ' + BLB + '  ' + BRST + SRST + get_line(right_menu_lines, 28) + BLB + SB + '  ' + BRST + FRST + SRST)
     print('\t' + FW + SB + '      ' + BLB + '*' + '                                                     ' + ' ' + BLB + FW + SB + '*' + BRST + '      ' + BLB + '                                                     ' + BRST + Style.RESET_ALL)
 
+######################################################################
+# //////////  [BEGIN] TSK DUCKY MENU DECLARATION [BEGIN]  \\\\\\\\\\ #
+######################################################################
 def ducky_menu(right_menu_lines = ducky_menu_lines):
 
     os.system('clear')
@@ -354,6 +394,51 @@ def ducky_menu(right_menu_lines = ducky_menu_lines):
             input("\n\t      No such option " + "\'" + ducky_choice + "\'" + " exists." + " Press ENTER key to try again.")
             ducky_menu(right_menu_lines = ducky_menu_lines)
 
+######################################################################
+# //////////  [BEGIN] TSK BUNNY MENU DECLARATION [BEGIN]  \\\\\\\\\\ #
+######################################################################
+def bunny_menu(right_menu_lines = bunny_menu_lines):
+
+    os.system('clear')
+
+    print_menu_technicolorama(right_menu_lines)
+
+    bunny_menuLoop = True
+
+    while bunny_menuLoop == True:
+
+        bunny_choice = input("\n\t      Enter your Bunny selection : ")
+
+        if bunny_choice == 'R' or bunny_choice == 'r':
+            ducky_menu()
+
+        elif bunny_choice == 'B' or bunny_choice == 'b':
+            print("\t      " + SB + BR + "ALREADY HERE!" + BRST)
+            time.sleep(2)
+            bunny_menu()
+
+        elif bunny_choice == 'T' or bunny_choice == 't':
+            teensy_menu()
+
+        elif bunny_choice == 'U' or bunny_choice == 'u':
+            USB_menu()
+
+        elif bunny_choice == 'H' or bunny_choice == 'h':
+            help_me_rhonda()
+            bunny_menu(right_menu_lines = bunny_menu_lines)
+            continue
+
+        elif bunny_choice == 'A' or bunny_choice == 'a':
+            main_menu()
+
+        elif bunny_choice == 'Q' or bunny_choice == 'q':
+            print("\n\t      Thank you for checking out TSK! [ HACK THE PLANET!!! ]\n")
+            sys.exit()
+
+        else:
+            input("\n\t      No such option " + "\'" + bunny_choice + "\'" + " exists." + " Press ENTER key to try again.")
+            bunny_menu(right_menu_lines = bunny_menu_lines)
+
 def teensy_menu(right_menu_lines = teensy_menu_lines):
 
     os.system('clear')
@@ -364,7 +449,7 @@ def teensy_menu(right_menu_lines = teensy_menu_lines):
 
     while teensy_menuLoop == True:
 
-        teensy_choice = input("\n\t      Enter your USB selection : ")
+        teensy_choice = input("\n\t      Enter your Teensy selection : ")
 
         if teensy_choice == 'R' or teensy_choice == 'r':
             ducky_menu()
