@@ -18,7 +18,8 @@ import time
 import locale
 import platform
 import subprocess
-from dialog import Dialog
+#from dialog import Dialog
+from check_deps import dep_checks
 from colorama import init, Fore, Back, Style
 from future.builtins import input
 
@@ -37,65 +38,6 @@ if 'Kali' in linux_distro:
 
 else:
     isKali = False
-
-
-# Function to check for installation of a few dependencies
-def check_deps():
-
-    needed = 0
-
-    # `Kali` Linux Dependencies
-
-    if isKali:
-
-        apt_cache.open()
-
-        # if os.path.isdir('/usr/share/fonts-font-awesome/') == True: [ Another way ]
-        if apt_cache["fonts-font-awesome"].is_installed == True:
-
-            print("\t[+] Font-Awesome        [INSTALLED]")
-            time.sleep(1)
-            print("\t[+] Looking good, continuing")
-            time.sleep(1)
-
-        else:
-
-            print("\t[+] Font-Awesome        [NOT INSTALLED]")
-            time.sleep(1)
-            print("\t[-] Installing Font-Awesome [ 'apt-get install fonts-font-awesome' ]")
-            os.system('apt-get update && apt-get install fonts-font-awesome')
-
-            print("\t[-] Rebuilding Font Cache [ 'fc-cache -f']")
-            os.system('fc-cache -f')
-
-            needed += 1
-
-        if apt_cache["python3-dialog"].is_installed == True:
-
-            print("\t[+] pythondialog        [INSTALLED]")
-            time.sleep(1)
-            print("\t[+] Looking good, continuing")
-            time.sleep(1)
-
-        else:
-
-            print("\t[+] pythondialog        [NOT INSTALLED]")
-            time.sleep(1)
-            print("\t[-] Installing pythondialog [ 'apt-get install python3-dialog' ]")
-            os.system('apt-get update && apt-get install python3-dialog')
-
-            print("\t[-] Rebuilding Font Cache [ 'fc-cache -f']")
-            os.system('fc-cache -f')
-
-            needed += 1
-
-        if needed > 0:
-            os.system('./TSK.py')
-            sys.exit()
-
-        else:
-
-            os.system('clear')
 
 
 def help_me_rhonda():
@@ -568,19 +510,26 @@ def main_menu():
             print("\n\n\t      Exiting in a HURRY!\n")
             sys.exit(0)
 
-
-
 if os.getuid() == 0:
 
     # On startup, set the menuLoop variable for menu choices, check dependencies and print the main menu
-    os.system('clear')
+    if isKali:
 
-    sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=140))
+        os.system('clear')
 
-    menuLoop = True; check_deps(); main_menu();
+        sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=140))
+
+        dep_checks(); menuLoop = True; main_menu();
+
+    else:
+
+        os.system('clear')
+
+        print("This version of TSK is currently designed to run on Kali Linux only!")
 
 else:
 
+    os.system('clear')
     exit("If you liked it then you should have run it as admin!")
 
 init()
