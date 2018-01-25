@@ -18,10 +18,12 @@ import time
 import locale
 import platform
 import subprocess
-#from dialog import Dialog
+from dialog import Dialog
 from check_deps import dep_checks
 from colorama import init, Fore, Back, Style
 from future.builtins import input
+
+locale.setlocale(locale.LC_ALL, '')
 
 # Set variable shotcuts for colorama colors
 FR = Fore.RED; FW = Fore.WHITE; FG = Fore.GREEN; FB = Fore.BLACK; FY = Fore.YELLOW; FM = Fore.MAGENTA; FBL = Fore.BLUE; FLB = Fore.LIGHTBLUE_EX; FLW = Fore.LIGHTWHITE_EX; FLBL = Fore.LIGHTBLACK_EX
@@ -38,7 +40,6 @@ if 'Kali' in linux_distro:
 
 else:
     isKali = False
-
 
 def help_me_rhonda():
 
@@ -517,9 +518,11 @@ if os.getuid() == 0:
 
         os.system('clear')
 
+        dep_checks()
+
         sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=140))
 
-        dep_checks(); menuLoop = True; main_menu();
+        menuLoop = True; main_menu();
 
     else:
 

