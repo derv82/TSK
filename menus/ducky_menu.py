@@ -9,7 +9,7 @@ import locale
 import filecmp
 import argparse
 import platform
-import subprocess   ## TODO // Remove if not necessary
+#import subprocess   ## TODO // Remove if not necessary
 from dialog import Dialog
 
 locale.setlocale(locale.LC_ALL, '')

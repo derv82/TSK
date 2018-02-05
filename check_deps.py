@@ -11,9 +11,9 @@ from colorama import init, Fore, Back, Style
 # Function to check for installation of a few dependencies
 def dep_checks():
 
-    FR = Fore.RED; FW = Fore.WHITE; FG = Fore.GREEN; FB = Fore.BLACK; FY = Fore.YELLOW; FM = Fore.MAGENTA; FBL = Fore.BLUE; FLB = Fore.LIGHTBLUE_EX; FLW = Fore.LIGHTWHITE_EX; FLBL = Fore.LIGHTBLACK_EX
-    BLB = Back.LIGHTBLACK_EX;  BR = Back.RED; BW = Back.WHITE; BB = Back.BLUE; BG = Back.GREEN; BM = Back.MAGENTA; BY = Back.YELLOW
-    SRST = Style.RESET_ALL; SB = Style.BRIGHT; SD = Style.DIM; SN = Style.NORMAL; BRST = Back.RESET; FRST = Fore.RESET
+    #FR = Fore.RED; FW = Fore.WHITE; FG = Fore.GREEN; FB = Fore.BLACK; FY = Fore.YELLOW; FM = Fore.MAGENTA; FBL = Fore.BLUE; FLB = Fore.LIGHTBLUE_EX; FLW = Fore.LIGHTWHITE_EX; FLBL = Fore.LIGHTBLACK_EX
+    #BLB = Back.LIGHTBLACK_EX;  BR = Back.RED; BW = Back.WHITE; BB = Back.BLUE; BG = Back.GREEN; BM = Back.MAGENTA; BY = Back.YELLOW
+    #SRST = Style.RESET_ALL; SB = Style.BRIGHT; SD = Style.DIM; SN = Style.NORMAL; BRST = Back.RESET; FRST = Fore.RESET
 
     # Are we running inside Kali Linux?
     apt_cache = apt.Cache()
@@ -84,6 +84,19 @@ def dep_checks():
 
                 print("[-] Installing python-apt [ 'apt-get install python-apt' ]")
                 os.system('apt-get -y update && apt-get install python-apt')
+
+            if apt_cache["dfu-programmer"].is_installed == True:
+
+                print("[+] dfu-programmer      [INSTALLED]")
+                time.sleep(1)
+
+            else:
+
+                print("[+] dfu-programmer    [NOT INSTALLED]\n")
+                time.sleep(1)
+
+                print("[-] Installing dfu-programmer [ 'apt-get install dfu-programmer' ]")
+                os.system('apt-get -y update && apt-get install dfu-programmer')
 
 
             print("\n[+] Looking good, continuing")
