@@ -1,0 +1,70 @@
+This menu will allow you to flash a specific firmware to the USB Rubber Ducky.
+
+In order to do so, you must place your ducky in DFU Programming Mode
+by holding down the button while plugging it in.
+
+A brief description of firmwares can be found below.
+
+-----------------
+ORIGINAL FIRMWARE
+-----------------
+
+The original firmware for the USB Rubber Ducky designed to work on all operating systems.
+(Windows, UNIX/Linux, OSX, Android, Etc)
+
+Encode a payload called 'inject.bin' to the SD card of the ducky and insert it into a target.
+The payload will run until finished and can be replayed by pressing the button on the ducky.
+
+--------
+FAT DUCK
+--------
+
+This firmware turns the ducky into a USB Mass Storage Device.
+
+In the case that the ducky cannot run due to restrictions on a target machine, you would still
+be able to use it to run payloads manually.
+
+This firmware does not support the automatic execution of payloads upon insertion of the ducky.
+
+-----------
+DETOUR DUCK
+-----------
+
+This firmware supports the execution of multiple payloads triggered by various methods.
+
+  - Encoding inject.bin to the ducky will execute the payload automatically as normal.
+  - Encoding inject2.bin to the ducky will execute the payload upon highlighting the NUM LOCK LED.
+  - Encoding inject3.bin to the ducky will execute the payload upon highlighting the CAPS LOCK LED.
+  - Encoding inject4.bin to the ducky will execute the payload upon highlighting the SCROLL LOCK LED.
+
+This is useful if you want to have a multi-staged payload where each stage can be deployed manually
+at will upon the highlighting of each LED.
+
+It is also useful in the case where you would like to run the same type of payloads on various OS's.
+You may have inject.bin run a simple one line payload such as a DELAY and then each other payload
+will execute a payload targeted for a specific operating system.
+
+Once the inject.bin payload has finished, it can be replayed if desired by pressing the ducky button.
+inject2.bin, inject3.bin and inject4.bin can be replayed by unhighlighting the related LED and
+highlighting it again.
+
+---------
+TWIN DUCK
+---------
+
+Twin Duck has three possible firmwares that can be flashed to the ducky:
+
+ORIGINAL:
+
+  This firmware executes inject.bin as normal in the original duck firmware but also mounts the SD Card
+  as USB Mass Storage.
+
+
+SPECIAL REQUEST 1:
+
+  This firmware executes the inject.bin payload on any LED trigger only - (CAPS LOCK, NUM LOCK, Etc).
+
+
+SPECIAL REQUEST 2:
+
+  This firmware executes the inject.bin payload on pressing the GPIO button on the ducky only.

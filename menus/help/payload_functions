@@ -1,0 +1,42 @@
+------------
+EDIT PAYLOAD
+------------
+
+- Selecting this option will let you edit the selected payload.
+
+- If you leave the payload as default or edit the payload and then select the 'OK' option,
+  the contents of the edited payload will be copied to buffer.
+
+- Selecting the 'CANCEL' option will close the EDIT PAYLOAD window without saving changes.
+
+--------------
+EXPORT PAYLOAD
+--------------
+
+- Selecting this option will let you export the selected payload.
+
+- Exported payloads are stored in the /payloads/exports/ folder.
+
+- If the selected payload has been edited with 'Edit Payload', then the modified payload will be exported.
+  Otherwise the default payload will be copied to the /payloads/exports/ folder.
+
+--------------
+ENCODE PAYLOAD
+--------------
+
+- Selecting this option will let you encode the selected payload.
+
+- An edit box with a default location of /media/ is presented for exporting the encoded payload.
+  In a typical situation, you should enter the full path to the SD card that is being used by the
+  USB Rubber Ducky.
+
+- A payload can be encoded to any valid folder location aside from an SD card if so desired.
+
+- If a payload has not been modified with 'Edit Payload' then the default payload will be encoded to the
+  path entered in the input box.
+
+--------------
+FLASH FIRMWARE
+--------------
+
+- Please see the help section under 'Flash Firmware' for more detailed information.
