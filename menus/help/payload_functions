@@ -5,20 +5,9 @@ EDIT PAYLOAD
 - Selecting this option will let you edit the selected payload.
 
 - If you leave the payload as default or edit the payload and then select the 'OK' option,
-  the contents of the edited payload will be copied to buffer.
+  the contents of the edited payload will be saved to /payloads/exports/.
 
-- Selecting the 'CANCEL' option will close the EDIT PAYLOAD window without saving changes.
-
---------------
-EXPORT PAYLOAD
---------------
-
-- Selecting this option will let you export the selected payload.
-
-- Exported payloads are stored in the /payloads/exports/ folder.
-
-- If the selected payload has been edited with 'Edit Payload', then the modified payload will be exported.
-  Otherwise the default payload will be copied to the /payloads/exports/ folder.
+- Selecting the 'CANCEL' option will close the EDIT PAYLOAD window without saving a file.
 
 --------------
 ENCODE PAYLOAD
@@ -34,6 +23,17 @@ ENCODE PAYLOAD
 
 - If a payload has not been modified with 'Edit Payload' then the default payload will be encoded to the
   path entered in the input box.
+
+--------------
+DELETE PAYLOAD
+--------------
+
+- Selecting this option will confirm wether or not you wish to delete the selected payload that has been
+  exported to /payloads/exports/.
+
+- You may wish to do this if you wish to edit the default payload from scratch and save it again to the
+  /payloads/exports/ folder.
+
 
 --------------
 FLASH FIRMWARE

@@ -245,7 +245,6 @@ def tag_proc():
 
     tp_code, tp_tag = d.menu("\n" + desc_tag,
                                 choices=[("Edit Payload", "Edits the currently selected payload"),
-                                #("Export Payload", "Exports the original or edited payload to the 'payloads/exports' folder"),
                                 ("Encode Payload", "Encodes the original or edited payload to a folder or SD card"),
                                 ("Delete Payload", "Deletes the exported payload from /payloads/exports/ if it exists"),
                                 ("Flash Firmware", "Flashes a specific firmware to the USB Rubber Ducky")],
@@ -283,7 +282,15 @@ def ducky_main_menu():
 
     current_menu = 'main_menu'
 
-    script_names = {'01' : '01_Hello_World', '02' : '02_WiFi_Password_Grabber', '03' : '03_Basic_Terminal_Commands_Ubuntu', '04' : '04_Information_Gathering_Ubuntu'}
+    ## TODO // Add a section for users to write their custom payloads in the editor and save them to a customs dir under /payloads/ducky/customs /payloads/bunny/customs etc. Also performing the same dynamic processing as listed above.
+
+    script_names = {'01' : '01_Hello_World', '02' : '02_WiFi_Password_Grabber', '03' : '03_Basic_Terminal_Commands_Ubuntu', '04' : '04_Information_Gathering_Ubuntu', '05.1' : '05.1_Hide_CMD_Window', '05.2' : '05.2_Hide_CMD_Window', '05.3' : '05.3_Hide_CMD_Window', '06' : '06_Netcat_FTP_Download_And_Reverse_Shell', '07.1' : '07.1_Wallpaper_Prank', '07.2' : '07.2_Wallpaper_Prank', '07.3' : '07.3_Wallpaper_Prank', '08' : '08_Wallpaper_Prank', '09' : '09_Reverse_Shell',
+                    '10' : '10_Reverse_Shell_With_Persistence', '11.1' : '11.1_Fork_Bomb', '11.2' : '11.2_Fork_Bomb', '12' : '12_Utilman_Exploit', '13' : '13_WiFi_Backdoor', '14' : '14_Non_Malicious_Auto_Defacer', '15' : '15_Lock_Your_Computer_Message', '16' : '16_Ducky_Downloader', '17' : '17_Ducky_Phisher', '18' : '18_FTP_Download_Upload', '19' : '19_Restart_Prank', '20.1' : '20.1_Silly_Mouse_Windows_Is_For_Kids', '20.2' : '20.2_Silly_Mouse_Windows_Is_For_Kids',
+                    '21.1' : '21.1_Windows_Screen_Rotation_Hack', '21.2' : '21.2_Windows_Screen_Rotation_Hack', '22.1' : '22.1_Powershell_Wget_Execute', '22.2' : '22.2_Powershell_Wget_Execute', '22.3' : '22.3_Powershell_Wget_Execute', '23.1' : '23.1_Mimikatz_Payload', '23.2' : '23.2_Mimikatz_Payload', '24' : '24_MobileTabs', '25' : '25_Create_Wireless_Network_Association_Auto_Connect_Pineapple', '26.1' : '26.1_Retrieve_SAM_And_SYSTEM_From_A_Live_File_System',
+                    '26.2' : '26.2_Retrieve_SAM_And_SYSTEM_From_A_Live_File_System', '27' : '27_Ugly_Rolled_Prank', '28' : '28_XMAS', '29' : '29_Pineapple_Association_Very_Fast', '30' : '30_WiFun', '31' : '31_MissDirection', '32' : '32_Remotely_Possible', '33' : '33_Batch_Wiper_Drive_Eraser', '34' : '34_Generic_Batch', '35' : '35_Paint_Hack', '36' : '36_Local_DNS_Poisoning', '37' : '37_Deny_Net_Access', '38.1' : '38.1_Run_EXE_From_SD', '38.2' : '38.2_Run_EXE_From_SD',
+                    '38.3' : '38.3_Run_EXE_From_SD', '39' : '39_Run_JAVA_From_SD', '40' : '40_OSX_Sudo_Passwords_Grabber', '41' : '41_OSX_Root_Backdoor', '42' : '42_OSX_User_Backdoor', '43' : '43_OSX_Local_DNS_Poisoning', '44' : '44_OSX_YouTube_Blaster', '45' : '45_OSX_Photo_Booth_Prank', '46' : '46_OSX_Internet_Protocol_Slurp', '47' : '47_OSX_ASCII_Prank', '48' : '48_OSX_iMessage_Capture', '49' : '49_OSX_Grab_Minecraft_Account_Password_And_Upload_To_FTP',
+                    '50' : '50_OSX_Wget_And_Execute', '51' : '51_OSX_Passwordless_SSH_Access', '52' : '52_OSX_Bella_RAT_Installation', '53' : '53_OSX_Sudo_For_All_Users_Without_Password', '54' : '54_Mr_Grays_Rubber_Hacks', '55' : '55_Copy_File_To_Desktop', '56' : '56_YouTube_Roll', '57' : '57_Disable_AVG_2012', '58' : '58_Disable_AVG_2013', '59' : '59_EICAR_AV_Test', '60' : '60_Download_Mimikatz_Grab_Passwords_And_Email', '61' : '61_Hotdog_Wallpaper', '62' : '62_Android_5.x_Lockscreen',
+                    '63' : '63_Chrome_Password_Stealer', '64' : '64_Website_Lock', '65' : '65_Windows_10_Download_And_Execute_File_With_Powershell', '66' : '66_Windows_10_Disable_Windows_Defender', '67' : '67_Windows_10_Disable_Windows_Defender_Through_Powershell', '68.1' : '68.1_Windows_7_Logoff_Prank', '68.2' : '68.2_Windows_7_Logoff_Prank', '69' : '69_Netcat_Reverse_Shell', '70' : '70_Fake_Update_Screen', '71' : '71_Rickroll'}
 
     main_code, main_tag = d.menu("\nSelect a payload below for more options",
                        choices=[("Hello World", "A payload for testing the USB Rubber ducky’s functionality"),
@@ -310,7 +317,10 @@ def ducky_main_menu():
                                 ("Ducky Phisher", "Modifies hosts file to redirect web sites to a site of your choosing"),
                                 ("FTP Download/Upload", "Downloads WinSCP and uploads the user profile, recursive, to a FTP server"),
                                 ("Restart Prank", "Adds a batch file to startup to restart the users PC"),
-                                ("Silly Mouse, Windows Is For Kids", "Changes cursor to loading sign and kills windows explorer"),
+                                ("Silly Mouse, Windows Is For Kids 1", "Changes cursor to loading sign and kills windows explorer - Version 1"),
+                                ("Silly Mouse, Windows Is For Kids 2", "Changes cursor to loading sign and kills windows explorer - Version 2"),
+                                ("Windows Screen Rotation Hack 1", "Rotate the screen 180 degrees on Windows 7"),
+                                ("Windows Screen Rotation Hack 2", "Rotate the screen 180 degrees on Windows 10"),
                                 ("Powershell Wget Execute 1", "Execute Powershell script from run box - Version 1"),
                                 ("Powershell Wget Execute 2", "Execute Powershell script from run box - Version 2"),
                                 ("Powershell Wget Execute 3", "Execute Powershell script from run box - Version 3"),
@@ -318,7 +328,17 @@ def ducky_main_menu():
                                 ("Mimikatz Payload 2", "Downloads mimikatz from web server and grabs passwords - Version 2"),
                                 ("MobileTabs", "Sends command line arguments to IE to open tabs of your choosing"),
                                 ("Create Wireless Network Association", "Creates a network association for the wifi pineapple"),
-                                ("Retrieve SAM & SYSTEM From a Live File System 1", "Grabs the SAM and SYSTEM files for hash retrieval later on - Version 1")
+                                ("Retrieve SAM & SYSTEM From a Live File System 1", "Grabs the SAM and SYSTEM files for hash retrieval later on - Version 1"),
+                                ("Retrieve SAM & SYSTEM From a Live File System 2", "Grabs the SAM and SYSTEM files for hash retrieval later on - Version 2"),
+                                ("Ugly Rolled Prank", "User profile start-up prank"),
+                                ("XMAS", "Happy Holidays Christmas Payload"),
+                                ("Pineapple Association", "Downloads an XML File and adds it to the local wireless profiles"),
+                                ("WiFun", "Sends local wireless settings via FTP"),
+                                ("MissDirection", "Edits the hosts file to allow you to redirect web pages where you would like the user to go"),
+                                ("Remotely Possible", "Disables firewall, creates local administrator account and enables remote access"),
+                                ("Batch Wiper Drive Eraser", "Erases attached drives on your computer"),
+                                ("Generic Batch", "Creates a script that types in a generic batch file and executes siletntly"),
+                                ("Paint Hack", "Breaks into command prompt using Microsoft Paint"),
                                 ],
                        title="HAK5 USB Rubber Ducky Payload Collection",
                        backtitle="TSK | USB Rubber Ducky Menu",
@@ -326,9 +346,234 @@ def ducky_main_menu():
                        help_button=True,)
 
     if main_code == d.OK:
-
+        ## TODO // Add a help_desc variable to hold the help descriptions from the wiki pages which displays in a msgbox before the edit window displays. If help_desc = '' then show no msgbox
         if main_tag == "Hello World":
             script_number = '01'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "WiFi Password Grabber":
+            script_number = '02'
+            desc_tag = "Grabs, Logs and Emails WiFi Passwords"
+            tag_proc()
+
+        if main_tag == "Basic Terminal Commands Ubuntu":
+            script_number = '03'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Information Gathering Ubuntu":
+            script_number = '04'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Hide CMD Window 1":
+            script_number = '05.1'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Hide CMD Window 2":
+            script_number = '05.2'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Hide CMD Window 3":
+            script_number = '05.3'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Netcat FTP Download & Reverse Shell":
+            script_number = '06'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Wallpaper Prank 1":
+            script_number = '07.1'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Wallpaper Prank 2":
+            script_number = '07.2'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Wallpaper Prank 3":
+            script_number = '07.3'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "You Got Quacked!":
+            script_number = '08'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Reverse Shell":
+            script_number = '09'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Reverse Shell + Persistence":
+            script_number = '10'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Fork Bomb 1":
+            script_number = '11.1'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Fork Bomb 2":
+            script_number = '11.2'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Utilman Exploit":
+            script_number = '12'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "WiFi Backdoor":
+            script_number = '13'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Non Malicious Auto Defacer":
+            script_number = '14'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Lock Your Computer Message":
+            script_number = '15'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Ducky Downloader":
+            script_number = '16'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Ducky Phisher":
+            script_number = '17'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "FTP Download/Upload":
+            script_number = '18'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Restart Prank":
+            script_number = '19'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Silly Mouse, Windows Is For Kids 1":
+            script_number = '20.1'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Silly Mouse, Windows Is For Kids 2":
+            script_number = '20.2'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Windows Screen Rotation Hack 1":
+            script_number = '21.1'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Windows Screen Rotation Hack 2":
+            script_number = '21.2'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Powershell Wget Execute 1":
+            script_number = '22.1'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Powershell Wget Execute 2":
+            script_number = '22.2'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Powershell Wget Execute 3":
+            script_number = '22.3'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Mimikatz Payload 1":
+            script_number = '23.1'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Mimikatz Payload 2":
+            script_number = '23.2'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "MobileTabs":
+            script_number = '24'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Create Wireless Network Association":
+            script_number = '25'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Retrieve SAM & SYSTEM From a Live File System 1":
+            script_number = '26.1'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Retrieve SAM & SYSTEM From a Live File System 2":
+            script_number = '26.2'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Ugly Rolled Prank":
+            script_number = '27'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "XMAS":
+            script_number = '28'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Pineapple Association":
+            script_number = '29'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "WiFun":
+            script_number = '30'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "MissDirection":
+            script_number = '31'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Remotely Possible":
+            script_number = '32'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Batch Wiper Drive Eraser":
+            script_number = '33'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Generic Batch":
+            script_number = '34'
+            desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
+            tag_proc()
+
+        if main_tag == "Paint Hack":
+            script_number = '35'
             desc_tag = "A payload for testing the USB Rubber ducky’s functionality"
             tag_proc()
 
