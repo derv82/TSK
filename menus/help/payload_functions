@@ -9,6 +9,13 @@ EDIT PAYLOAD
 
 - Selecting the 'CANCEL' option will close the EDIT PAYLOAD window without saving a file.
 
+- If any notes exist for the selected payload, they will be displayed before the edit box
+  appears.
+
+- The payload notes have been taken straight from the HAK5 Wiki and are presented exactly
+  as written by their respective authors. Some may have been slightly edited for spelling
+  and grammar as necessary.
+
 --------------
 ENCODE PAYLOAD
 --------------
