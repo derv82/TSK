@@ -51,7 +51,7 @@ def dep_checks():
                 time.sleep(1)
 
                 print("[-] Installing Font-Awesome [ 'apt-get install fonts-font-awesome' ]")
-                os.system('apt-get -y update && apt-get install fonts-font-awesome')
+                os.system('apt-get -y update && apt-get -y install fonts-font-awesome')
 
                 print("[-] Rebuilding Font Cache [ 'fc-cache -f']")
                 os.system('fc-cache -f')
@@ -70,7 +70,7 @@ def dep_checks():
                 time.sleep(1)
 
                 print("[-] Installing pythondialog [ 'apt-get install python3-dialog' ]")
-                os.system('apt-get -y update && apt-get install python3-dialog')
+                os.system('apt-get -y update && apt-get -y install python3-dialog')
 
             if apt_cache["python-apt"].is_installed == True:
 
@@ -83,7 +83,7 @@ def dep_checks():
                 time.sleep(1)
 
                 print("[-] Installing python-apt [ 'apt-get install python-apt' ]")
-                os.system('apt-get -y update && apt-get install python-apt')
+                os.system('apt-get -y update && apt-get -y install python-apt')
 
             if apt_cache["dfu-programmer"].is_installed == True:
 
@@ -96,7 +96,7 @@ def dep_checks():
                 time.sleep(1)
 
                 print("[-] Installing dfu-programmer [ 'apt-get install dfu-programmer' ]")
-                os.system('apt-get -y update && apt-get install dfu-programmer')
+                os.system('apt-get -y update && apt-get -y install dfu-programmer')
 
 
             print("\n[+] Looking good, continuing")

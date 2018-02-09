@@ -14,15 +14,15 @@ from dialog import Dialog
 
 locale.setlocale(locale.LC_ALL, '')
 
-print("\x1b[8;50;140t")
+#print("\x1b[8;50;140t")
 
 d = Dialog(dialog="dialog", autowidgetsize=True)
 
 # ++ VARIABLES FOR FOLDER PATHS ++ #
-help_folder =     '../menus/help/'
-payload_folder =  '../payloads/ducky/'
-exports_folder =  '../payloads/exports/'
-firmware_folder = '../tools/ducky/USB-Rubber-Ducky/ducky-flasher/Firmware/'
+help_folder =     './menus/help/ducky/'
+payload_folder =  './payloads/ducky/'
+exports_folder =  './payloads/exports/'
+firmware_folder = './tools/ducky/USB-Rubber-Ducky/ducky-flasher/Firmware/'
 # -- VARIABLES FOR FOLDER PATHS -- #
 
 # ++ DICTIONARY VALUES FOR DEFAULT SCRIPT NAMES ++ #
@@ -39,9 +39,11 @@ script_names = {'01' : '01_Hello_World', '02' : '02_WiFi_Password_Grabber', '03'
 linux_distro = platform.linux_distribution()
 
 if 'Kali' in linux_distro:
+
     isKali = True
 
 else:
+
     isKali = False
 # -- DETERMINE WHAT LINUX OS IS BEING USED (CURRENTLY TESTING WITH KALI) -- #
 
@@ -56,19 +58,19 @@ def ducky_help():
 
     if current_menu == 'main_menu':
 
-        d.textbox(help_folder + '/payloads_menu', height=None, width=None, title="Payloads Menu Help")
+        d.textbox(help_folder + 'payloads_menu', height=None, width=None, title="Payloads Menu Help")
 
         ducky_main_menu()
 
-    if current_menu == 'tag_proc_menu':
+    elif current_menu == 'tag_proc_menu':
 
-        d.textbox(help_folder + '/payload_functions', height=None, width=None, title="Payload Functions Help")
+        d.textbox(help_folder + 'payload_functions', height=None, width=None, title="Payload Functions Help")
 
         tag_proc()
 
-    if current_menu == 'flash_firmware_menu':
+    elif current_menu == 'flash_firmware_menu':
 
-        d.textbox(help_folder + '/flash_firmware', height=None, width=None, title="Firmware FLashing Help")
+        d.textbox(help_folder + 'flash_firmware', height=None, width=None, title="Firmware Flashing Help")
 
         flash_firmware_menu()
 # -- FUNCTION FOR DISPLAYING A SCROLLABLE TEXT BOX WITH THE README FILE -- #
@@ -253,7 +255,7 @@ def flash_firmware_menu():
 # ++ FUNCTION TO PROVIDE A MENU TO PROCESS EACH TAG ASSIGNED PAYLOAD (CURRENTLY SUPPORTS 4 FUNCTIONS) ++ #
 def tag_proc():
 
-    global tp_code, tp_tag, current_menu
+    global tp_tag, current_menu
 
     current_menu = 'tag_proc_menu'
 
@@ -289,7 +291,7 @@ def tag_proc():
 # ++ FUNCTION FOR THE DUCKY PAYLOADS MAIN MENU ++ #
 def ducky_main_menu():
 
-    global main_code, main_tag, desc_tag, note_desc, script_number, current_menu
+    global main_tag, desc_tag, note_desc, script_number, current_menu
 
     current_menu = 'main_menu'
     ## TODO // Possible Idea For Next Version - Redesign this to modify each payload file as a config file with [PAYLOAD NAME] [SHORT DESCRIPTION] [HELP INFO] Etc and read Key info from config file.
@@ -381,9 +383,7 @@ def ducky_main_menu():
                                 ("Windows 10 Logoff Prank", "Logs out of a Windows 10 machine"),
                                 ("Netcat Reverse Shell", "Starts a Netcat Reverse Shell"),
                                 ("Fake Update Screen", "Brings up the Windows 10 page of fakeupdate.net and make it full screen"),
-                                ("Rickroll", "Never gonna give you up!"),
-
-                                ],
+                                ("Rickroll", "Never gonna give you up!"),],
                        title="HAK5 USB Rubber Ducky Payload Collection",
                        backtitle="TSK | USB Rubber Ducky Menu",
                        no_shadow=True,
@@ -902,41 +902,53 @@ def ducky_main_menu():
             tag_proc()
 
 
-
     if main_code == d.HELP:
         ducky_help()
 
     if main_code == d.CANCEL:
-        sys.exit("Exiting Gracefully | Thank You For Using TSK!")
+
+        sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=140))
+
+        #sys.exit("Exiting Gracefully | Thank You For Using TSK!")
+
 # ++ FUNCTION FOR THE DUCKY PAYLOADS MAIN MENU ++ #
 
+def ducky_routines():
+
+    if os.getuid() == 0:
+
+        try:
+        # On startup, set the menuLoop variable for menu choices, check dependencies and print the main menu
+            if isKali:
+
+                print("\x1b[8;50;140t")
+
+                os.system('clear')
+
+                ducky_main_menu()
+
+            else:
+
+                os.system('clear')
+
+                print("This version of TSK is currently designed to run on Kali Linux only!")
+
+        except KeyboardInterrupt:
+
+            print("Exiting in a HURRY!\n")
+
+            sys.exit(0)
+    else:
+
+        os.system('clear')
+
+        exit("If you liked it then you should have run it as admin!")
 
 #################################################
 # START MAIN ROUTINES
 #################################################
-if os.getuid() == 0:
-
-    try:
-    # On startup, set the menuLoop variable for menu choices, check dependencies and print the main menu
-        if not isKali:
-
-            os.system('clear')
-
-            ducky_main_menu()
-
-        else:
-
-            os.system('clear')
-
-            print("This version of TSK is currently designed to run on Kali Linux only!")
-
-    except KeyboardInterrupt:
-
-        print("Exiting in a HURRY!\n")
-
-        sys.exit(0)
-else:
+if __name__ == '__main__':
 
     os.system('clear')
 
-    exit("If you liked it then you should have run it as admin!")
+    print("This module is intended to be run from within the TSK main program only!")

@@ -5,11 +5,16 @@
 # The Skeleton Key v.the first [ 9-11-2017 ] #
 # Codename - The Patriotic Penguin           #
 #                                            #
-# - A project by sandmansandito and derv82 - #
+# A project by sandmansandito                #
+#                                            #
+# Special thanks to derv82 for some code     #
+# tweaks and testing                         #
 #                                            #
 # This is a very experimental first version  #
 # Hopefully it should improve over time      #
 ##############################################
+
+## TODO // Formatting & some code cleanup
 
 import os
 import apt
@@ -18,12 +23,16 @@ import time
 import locale
 import platform
 import subprocess
-from dialog import Dialog
-from check_deps import dep_checks
+#from dialog import Dialog
+#from check_deps import dep_checks
+from menus.ducky import ducky_routines
 from colorama import init, Fore, Back, Style
 from future.builtins import input
 
 locale.setlocale(locale.LC_ALL, '')
+
+# Set size of terminal window
+set_window_size = sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=140))
 
 # Set variable shotcuts for colorama colors
 FR = Fore.RED; FW = Fore.WHITE; FG = Fore.GREEN; FB = Fore.BLACK; FY = Fore.YELLOW; FM = Fore.MAGENTA; FBL = Fore.BLUE; FLB = Fore.LIGHTBLUE_EX; FLW = Fore.LIGHTWHITE_EX; FLBL = Fore.LIGHTBLACK_EX
@@ -297,13 +306,17 @@ def print_menu_technicolorama(right_menu_lines = main_menu_lines):
 ######################################################################
 def ducky_menu(right_menu_lines = ducky_menu_lines):
 
-    os.system('clear')
+    #os.system('clear')
 
-    print_menu_technicolorama(right_menu_lines)
+    #print_menu_technicolorama(right_menu_lines)
 
     ducky_menuLoop = True
 
     while ducky_menuLoop == True:
+
+        os.system('clear')
+
+        print_menu_technicolorama(right_menu_lines)
 
         ducky_choice = input("\n\t      Enter your Ducky selection : ")
 
@@ -311,6 +324,9 @@ def ducky_menu(right_menu_lines = ducky_menu_lines):
             print("\t      " + SB + BR + "ALREADY HERE!" + BRST)
             time.sleep(2)
             ducky_menu()
+
+        elif ducky_choice == '1':
+            ducky_routines()
 
         elif ducky_choice == 'B' or ducky_choice == 'b':
             bunny_menu()
@@ -518,9 +534,9 @@ if os.getuid() == 0:
 
         os.system('clear')
 
-        dep_checks()
+        #dep_checks()
 
-        sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=140))
+        set_window_size
 
         menuLoop = True; main_menu();
 
