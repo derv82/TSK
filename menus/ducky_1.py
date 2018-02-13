@@ -6,7 +6,7 @@ import apt
 import sys
 import time
 import locale
-import filecmp
+#import filecmp
 import argparse
 import platform
 #import subprocess   ## TODO // Remove if not necessary
@@ -80,6 +80,9 @@ def edit_payload():
 
     global ptext
 
+    with open(payload_folder + script_names[script_number]) as orig_file:
+        pfile = orig_file.read()
+
     if os.path.exists(exports_folder + script_names[script_number]):
         payload_notes()
         pcode, ptext = d.editbox(exports_folder + script_names[script_number], height=0, width=0, title="Editing Exported Payload Script File " + exports_folder + script_names[script_number])
@@ -91,15 +94,24 @@ def edit_payload():
 
     if pcode == d.OK:
 
-        with open(exports_folder + script_names[script_number], 'w') as f:
-            f.write(ptext)
+        with open(exports_folder + script_names[script_number], 'w') as export_file:
+            export_file.write(ptext)
 
         d.msgbox("Payload has been successfully written to\n" + exports_folder + script_names[script_number])
 
         tag_proc()
 
     if pcode == d.CANCEL:
-        tag_proc()
+        d.msgbox(ptext)
+        #if pfile != ptext:
+
+        #    cancel_code = d.yesno("Are you sure you wish to cancel without saving?", yes_label='Yes', no_label='No')
+
+        #    if cancel_code == d.OK:
+        #        tag_proc()
+
+        #    else:
+        #        d.editbox(ptext, height=0, width=0, title=payload_folder + script_names[script_number])
 
 # -- FUNCTION FOR EDITING THE SELECTED PAYLOAD, STORING THE RESULT & RETURN TO TAG_PROC MENU -- #
 
@@ -298,7 +310,7 @@ def ducky_main_menu():
     ## TODO // Add a section for users to write their custom payloads in the editor and save them to a customs dir under /payloads/ducky/customs /payloads/bunny/customs etc. Also performing the same dynamic processing as listed above.
     ## TODO // Custom Menu Choices - Edit Payload Name | Edit Short Description | Edit Payload Script | Edit Payload Notes
 
-    main_code, main_tag = d.menu("\nSelect a payload below for more options",
+    main_code, main_tag = d.menu("\nSelect a payload below for more options\n\nThe official HAK5 USB Rubber Ducky Documentation Site can be found at: https://www.hak5.org/gear/usb-rubber-ducky/docs\n\nFor more ducky ",
                        choices=[("Hello World", "A payload for testing the USB Rubber ducky’s functionality"),
                                 ("WiFi Password Grabber", "Grabs, Logs and Emails WiFi Passwords"),
                                 ("Basic Terminal Commands Ubuntu", "Example of how to execute commands in Ubuntu through Xterm"),
@@ -921,7 +933,7 @@ def ducky_routines():
         # On startup, set the menuLoop variable for menu choices, check dependencies and print the main menu
             if isKali:
 
-                print("\x1b[8;50;140t")
+                print("\x1b[8;40;140t")
 
                 os.system('clear')
 
@@ -944,11 +956,11 @@ def ducky_routines():
 
         exit("If you liked it then you should have run it as admin!")
 
-#################################################
-# START MAIN ROUTINES
-#################################################
+## ++ MAIN ROUTINE ++ ##
 if __name__ == '__main__':
 
     os.system('clear')
 
+    # For now preventing module functionality unless run from within TSK main menu
     print("This module is intended to be run from within the TSK main program only!")
+## -- MAIN ROUTINE -- ##

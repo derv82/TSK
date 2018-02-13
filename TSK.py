@@ -25,7 +25,6 @@ import platform
 import subprocess
 #from dialog import Dialog
 #from check_deps import dep_checks
-from menus.ducky import ducky_routines
 from colorama import init, Fore, Back, Style
 from future.builtins import input
 
@@ -132,18 +131,18 @@ ducky_menu_lines = [
         FY + '      and optionally flash to the ducky          ',
         '',
         '',
-        FW + '   2. ' + BY + 'Install simple-ducky payload generator' + BRST + '     ',
+        FW + '   2. ' + BY + 'Launch the simple-ducky payload generator' + BRST + '  ',
         '',
-        FY + '      Install the latest version of simple-ducky ',
+        FY + '      Launch the latest version of simple-ducky  ',
         '',
         FY + '      for generating ducky payloads & listeners  ',
         '',
-        FW + '   3. ' + BY + 'Encoders | Decoders | Firmwares | Payloads' + BRST + ' ',
+        FW + '   3. ' + BY + 'Custom Payloads & Extra Resources' + BRST + '          ',
         '',
-        FY + '      Select from various encoders, decoders,    ',
-        FY + '      firmwares and other miscellaneous useful   ',
+        FY + '      Select from a custom ducky payload editor  ',
+        FY + '      or other extra resources for getting the   ',
         '',
-        FY + '      payloads for the USB rubber ducky          ',
+        FY + '      most use out of your USB Rubber Ducky      ',
         '',
         FLBL + '  <<< [P]REV       ' + FW + 'Menu 1 / 1' + FLBL +'        [N]EXT >>>  '
     ]
@@ -326,6 +325,15 @@ def ducky_menu(right_menu_lines = ducky_menu_lines):
             ducky_menu()
 
         elif ducky_choice == '1':
+            from menus.ducky_1 import ducky_routines
+            ducky_routines()
+
+        elif ducky_choice == '2':
+            from menus.ducky_2 import ducky_routines
+            ducky_routines()
+
+        elif ducky_choice == '3':
+            from menus.ducky_3 import ducky_routines
             ducky_routines()
 
         elif ducky_choice == 'B' or ducky_choice == 'b':

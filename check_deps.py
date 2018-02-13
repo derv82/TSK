@@ -6,7 +6,7 @@ import apt
 import sys
 import time
 import platform
-from colorama import init, Fore, Back, Style
+#from colorama import init, Fore, Back, Style
 
 # Function to check for installation of a few dependencies
 def dep_checks():
@@ -38,7 +38,16 @@ def dep_checks():
 
         if depsCheck == 'y' or depsCheck == 'Y':
 
-            os.system('pip3 install -r requirements.txt')
+            if apt_cache["python3-pip"].is_installed == True:
+
+                os.system('pip3 install -r requirements.txt')
+
+            else:
+                print("\n[+] python3-pip        [NOT INSTALLED]\n")
+                time.sleep(1)
+
+                print("[-] Installing python3-pip [ 'apt-get install python3-pip' ]")
+                os.system('apt-get -y update && apt-get -y install python3-pip')
 
             if apt_cache["fonts-font-awesome"].is_installed == True:
 
@@ -101,6 +110,15 @@ def dep_checks():
 
             print("\n[+] Looking good, continuing")
             time.sleep(1)
+
+        launchCheck = input("Launch TSK? ")
+
+        if launchCheck == 'y' or launchCheck == 'Y':
+
+            os.system('python3 TSK.py')
+
+        else :
+            print('You can launch TSK with \'python3 ./TSK.py\' or \'./TSK.py\'')
 
     else:
 
