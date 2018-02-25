@@ -4,6 +4,7 @@
 import os
 import apt
 import platform
+import locale
 
 locale.setlocale(locale.LC_ALL, '')
 
@@ -23,23 +24,23 @@ else:
 
 def simple_ducky_checker():
 
-    if os.path.exists(simple_ducky_local_folder):
-        os.system(simple_ducky_tools_folder + 'update.sh')
-        os.system('simple-ducky')
+    install_sh_path = os.path.join(simple_ducky_local_folder, 'install.sh')
+    while not os.path.exists(install_sh_path):
 
-    else:
+        install_confirm = input("simple-ducky was not found, would you like to install now (y/N)? ")
 
-        while True:
+        if install_confirm.lower() in ['y', 'yes']:
 
-            install_confirm = input("simple-ducky was not found, would you like to install now (y/N)? ")
+            os.system(install_sh_path)
 
-            if install_confirm == 'y' or install_confirm == 'Y':
+        else:
 
-                os.system(simple_ducky_tools_folder + 'install.sh')
+            print("simple-ducky must be installed before it can be launched.\nPlease install simple-ducky and try again.")
 
-            elif install_confirm == 'n' or install_confirm == 'N':
+    update_sh_path = os.path.join(simple_ducky_tools_folder, 'update.sh')
+    os.system(update_sh_path)
 
-                print("simple-ducky must be installed before it can be launched.\nPlease install simple-ducky and try again.")
+    os.system('simple-ducky')
 
 
 def ducky_routines():
