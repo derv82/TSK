@@ -19,11 +19,15 @@ locale.setlocale(locale.LC_ALL, '')
 d = Dialog(dialog="dialog", autowidgetsize=True)
 
 # ++ VARIABLES FOR FOLDER PATHS ++ #
-help_folder =     './menus/help/ducky/'
-payload_folder =  './payloads/ducky/'
-exports_folder =  './payloads/exports/'
-firmware_folder = './tools/ducky/USB-Rubber-Ducky/ducky-flasher/Firmware/'
+help_folder =     os.path.abspath('./menus/help/ducky/')
+payload_folder =  os.path.abspath('./payloads/ducky/')
+exports_folder =  os.path.abspath('./payloads/exports/')
+firmware_folder = os.path.abspath('./tools/ducky/USB-Rubber-Ducky/ducky-flasher/Firmware/')
 # -- VARIABLES FOR FOLDER PATHS -- #
+
+# Create directories if they don't exist
+if not os.path.exists(exports_folder):
+    os.makedirs(exports_folder)
 
 # ++ DICTIONARY VALUES FOR DEFAULT SCRIPT NAMES ++ #
 script_names = {'01' : '01_Hello_World', '02' : '02_WiFi_Password_Grabber', '03' : '03_Basic_Terminal_Commands_Ubuntu', '04' : '04_Information_Gathering_Ubuntu', '05.1' : '05.1_Hide_CMD_Window', '05.2' : '05.2_Hide_CMD_Window', '05.3' : '05.3_Hide_CMD_Window', '06' : '06_Netcat_FTP_Download_And_Reverse_Shell', '07.1' : '07.1_Wallpaper_Prank', '07.2' : '07.2_Wallpaper_Prank', '07.3' : '07.3_Wallpaper_Prank', '08' : '08_You_Got_Quacked', '09' : '09_Reverse_Shell',
@@ -80,24 +84,26 @@ def edit_payload():
 
     global ptext
 
-    with open(payload_folder + script_names[script_number]) as orig_file:
+    payload_path = os.path.join(payload_folder, script_names[script_number])
+    with open(payload_path) as orig_file:
         pfile = orig_file.read()
 
-    if os.path.exists(exports_folder + script_names[script_number]):
+    export_path = os.path.join(exports_folder, script_names[script_number])
+    if os.path.exists(export_path):
         payload_notes()
-        pcode, ptext = d.editbox(exports_folder + script_names[script_number], height=0, width=0, title="Editing Exported Payload Script File " + exports_folder + script_names[script_number])
+        pcode, ptext = d.editbox(export_path, height=0, width=0, title="Editing Exported Payload Script File " + export_path)
 
     else:
         payload_notes()
-        pcode, ptext = d.editbox(payload_folder + script_names[script_number], height=0, width=0, title="Editing Original Payload Script File " + payload_folder + script_names[script_number])
+        pcode, ptext = d.editbox(payload_path, height=0, width=0, title="Editing Original Payload Script File " + payload_path)
 
 
     if pcode == d.OK:
 
-        with open(exports_folder + script_names[script_number], 'w') as export_file:
+        with open(export_path, 'w') as export_file:
             export_file.write(ptext)
 
-        d.msgbox("Payload has been successfully written to\n" + exports_folder + script_names[script_number])
+        d.msgbox("Payload has been successfully written to\n" + export_path)
 
         tag_proc()
 
@@ -121,9 +127,19 @@ def encode_payload():
 
     if fcode == d.OK:
 
-        if os.path.exists(exports_folder + script_names[script_number]):
+        export_path = os.path.join(exports_folder, script_names[script_number])
+        payload_path = os.path.join(payload_folder, script_names[script_number])
+        inject_path = os.path.join(fstring, 'inject.bin')
 
-            encode_result = os.system('java -jar ../tools/ducky/USB-Rubber-Ducky/duckencoder.jar -i ' + exports_folder + script_names[script_number] + ' -o ' + fstring + 'inject.bin')
+        if os.path.exists(export_path):
+
+            encode_command = [
+                'java',
+                '-jar', '../tools/ducky/USB-Rubber-Ducky/duckencoder.jar',
+                '-i', export_path,
+                '-o', inject_path
+            ]
+            encode_result = os.system(' '.join(encode_command))
 
             if encode_result == 0:
                 d.msgbox("\nThe payload has been exported successfully!", height=8, width=35, title="Encode Payload Result")
@@ -133,9 +149,15 @@ def encode_payload():
                 d.msgbox("\nAn error occured while encoding the payload!", title="Encode Payload Result")
                 tag_proc()
 
-        elif os.path.exists(payload_folder + script_names[script_number]):
+        elif os.path.exists(payload_path):
 
-            encode_result = os.system('java -jar ../tools/ducky/USB-Rubber-Ducky/duckencoder.jar -i ' + payload_folder + script_names[script_number] + ' -o ' + fstring + 'inject.bin')
+            encode_command = [
+                'java',
+                '-jar', '../tools/ducky/USB-Rubber-Ducky/duckencoder.jar',
+                '-i', payload_path,
+                '-o', inject_path
+            ]
+            encode_result = os.system(' '.join(encode_command))
 
             if encode_result == 0:
                 d.msgbox("\nThe payload has been exported successfully!", height=8, width=35, title="Encode Payload Result")
@@ -151,20 +173,21 @@ def encode_payload():
 
 def delete_payload():
 
-    if os.path.exists(exports_folder + script_names[script_number]):
+    export_path = os.path.join(exports_folder, script_names[script_number])
+    if os.path.exists(export_path):
 
-        yncode = d.yesno("\nAn exported payload file has been found at\n" + exports_folder + script_names[script_number] + ".\n\nAre you sure you want to delete this file?", title="Delete Exported File?", yes_label="YES", no_label="NO")
+        yncode = d.yesno("\nAn exported payload file has been found at\n" + export_path + ".\n\nAre you sure you want to delete this file?", title="Delete Exported File?", yes_label="YES", no_label="NO")
 
         if yncode == d.OK:
 
-            os.remove(exports_folder + script_names[script_number])
+            os.remove(export_path)
             tag_proc()
 
         else:
             tag_proc()
 
     else:
-        d.msgbox("\nAn exported payload could not be found at\n" + exports_folder + script_names[script_number], width=45, height=8, title='Delete Payload')
+        d.msgbox("\nAn exported payload could not be found at\n" + export_path, width=45, height=8, title='Delete Payload')
         tag_proc()
 
 # ++ FUNCTION FOR FLASHING DIFFERENT FIRMWARES TO THE USB RUBBER DUCKY (CURRENTLY SUPPORTS 6 FW'S) ++ #
