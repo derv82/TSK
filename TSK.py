@@ -5,10 +5,10 @@
 # The Skeleton Key v.the first [ 9-11-2017 ] #
 # Codename - The Patriotic Penguin           #
 #                                            #
-# A project by sandmansandito                #
+# A project by sandmansandito & derv82       #
 #                                            #
-# Special thanks to derv82 for some code     #
-# tweaks and testing                         #
+#                                            #
+#                                            #
 #                                            #
 # This is a very experimental first version  #
 # Hopefully it should improve over time      #

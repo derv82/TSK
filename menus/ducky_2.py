@@ -33,9 +33,11 @@ def simple_ducky_checker():
 
             os.system(install_sh_path)
 
+
         else:
 
             print("simple-ducky must be installed before it can be launched.\nPlease install simple-ducky and try again.")
+            break
 
     update_sh_path = os.path.join(simple_ducky_tools_folder, 'update.sh')
     os.system(update_sh_path)
